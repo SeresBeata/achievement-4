@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { MovieCard } from '../movie-card/MovieCard';
+import { MovieView } from '../movie-view/MovieView';
 
 //Export the created MainView component
 export const MainView = () => {
@@ -73,6 +74,14 @@ export const MainView = () => {
         },
     ]);
 
+    //Create state variable, called selectedMovie, where the initial value of selectedMovie state is null.
+    const [selectedMovie, setSelectedMovie] = useState(null);
+
+    //Use conditional statement, if selectedMovie is true, then return the MovieView child component
+    if (selectedMovie) {
+        return <MovieView movie={selectedMovie} />;
+    }
+
     //If movies array is empty, return message "The list is empty!"
     if (movies.length === 0) {
         return <div>The list is empty!</div>;
@@ -86,9 +95,18 @@ export const MainView = () => {
                 {/* Use the map() method to iterate through movies array items*/}
                 {movies.map((movie) => {
                     {
-                        /* Pass data from parent component (MainView) to a child component (MovieCard) by using props */
+                        /* Pass data from parent component (MainView) to a child component (MovieCard) by using prop, called "movie". */
+                        /* Pass a function from the MainView component to MoveCard as a prop called onMovieClick that executes setSelectedMovies(). */
                     }
-                    return <MovieCard key={movie._id} movie={movie} />;
+                    return (
+                        <MovieCard
+                            key={movie._id}
+                            movie={movie}
+                            onMovieClick={(newSelectedMovie) =>
+                                setSelectedMovie(newSelectedMovie)
+                            }
+                        />
+                    );
                 })}
             </div>
         </>

@@ -79,7 +79,13 @@ export const MainView = () => {
 
     //Use conditional statement, if selectedMovie is true, then return the MovieView child component
     if (selectedMovie) {
-        return <MovieView movie={selectedMovie} />;
+        return (
+            <MovieView
+                movie={selectedMovie}
+                //Pass a function from the MainView component to MovieView as a prop called onBackClick that executes setSelectedMovies(), setting the value of selectedMovie to the initial state value, null.
+                onBackClick={() => setSelectedMovie(null)}
+            />
+        );
     }
 
     //If movies array is empty, return message "The list is empty!"

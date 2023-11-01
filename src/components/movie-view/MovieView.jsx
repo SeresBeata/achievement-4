@@ -1,7 +1,7 @@
 //Create MovieView child component
-//Pass data from parent component (MainView) to the child component (MovieView) by using prop
+//Pass data and function from parent component (MainView) to the child component (MovieView) by using props
 //Export the created child component MovieView, and return data about current movie in case of click event
-export const MovieView = ({ movie }) => {
+export const MovieView = ({ movie, onBackClick }) => {
     return (
         <div>
             <div>
@@ -35,6 +35,14 @@ export const MovieView = ({ movie }) => {
             <div>
                 <p>Description:</p>
                 <p>{movie.description}</p>
+            </div>
+            <div>
+                <button
+                    //Call the function prop onBackClick when the button click occurs.
+                    onClick={onBackClick}
+                >
+                    Back
+                </button>
             </div>
         </div>
     );

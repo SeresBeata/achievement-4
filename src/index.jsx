@@ -1,15 +1,13 @@
 import { createRoot } from 'react-dom/client';
+import { MainView } from './components/main-view/MainView';
 
 // Import statement to indicate the need to bundle `./index.scss`
 import './index.scss';
 
 // Main component
 const MyFlixApplication = () => {
-    return (
-        <div className="my-flix">
-            <div>Good morning!</div>
-        </div>
-    );
+    //Return the MainView component
+    return <MainView />;
 };
 
 // Find the “root” DOM node

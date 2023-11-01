@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { MovieCard } from '../movie-card/MovieCard';
 
 //Export the created MainView component
 export const MainView = () => {
@@ -84,12 +85,10 @@ export const MainView = () => {
             <div>
                 {/* Use the map() method to iterate through movies array items*/}
                 {movies.map((movie) => {
-                    return (
-                        <div key={movie._id}>
-                            <span>Title: {movie.title}</span>
-                            <span> Genre: {movie.genre.genreName}</span>
-                        </div>
-                    );
+                    {
+                        /* Pass data from parent component (MainView) to a child component (MovieCard) by using props */
+                    }
+                    return <MovieCard key={movie._id} movie={movie} />;
                 })}
             </div>
         </>

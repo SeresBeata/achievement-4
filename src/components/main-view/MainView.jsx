@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useEffect } from 'react';
 import { MovieCard } from '../movie-card/MovieCard';
 import { MovieView } from '../movie-view/MovieView';
 
@@ -6,6 +7,36 @@ import { MovieView } from '../movie-view/MovieView';
 export const MainView = () => {
     //Use "useState" to declare a "state variable", called movies. Pass the initial state (which is an empty array) as an argument to the useState().
     const [movies, setMovies] = useState([]);
+
+    //Fetch data from API and populate movies state using setMovies, with the fetched movies array from myFlix API
+    useEffect(() => {
+        fetch('https://movieapi-myflix.onrender.com/movies')
+            .then((response) => response.json())
+            .then((data) => {
+                console.log(data);
+                const moviesFromApi = data.map((movie) => {
+                    return {
+                        _id: movie._id,
+                        title: movie.title,
+                        imagePath: movie.imagePath,
+                        description: movie.description,
+                        releaseDate: movie.releaseDate,
+                        genre: {
+                            genreName: movie.genre.genreName,
+                            genreDescription: movie.genre.genreDescription,
+                        },
+                        director: {
+                            directorName: movie.director.directorName,
+                            bio: movie.director.bio,
+                            birth: movie.director.birth,
+                            death: movie.director.death,
+                        },
+                        featured: movie.featured,
+                    };
+                });
+                setMovies(moviesFromApi);
+            });
+    }, []);
 
     //Create state variable, called selectedMovie, where the initial value of selectedMovie state is null.
     const [selectedMovie, setSelectedMovie] = useState(null);
@@ -26,7 +57,7 @@ export const MainView = () => {
         return <div>The list is empty!</div>;
     }
 
-    //Return the <h1> with the titles and genres of example movies
+    //Return the <h1> with the titles of movies
     return (
         <>
             <h1>Movies</h1>

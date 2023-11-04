@@ -40,6 +40,11 @@ export const MovieView = ({ movie, onBackClick }) => {
                 <p>{movie.description}</p>
             </div>
             <div>
+                {/* to convert "featured" boolean to string*/}
+                <span>Featured: </span>
+                <span>{movie.featured.toString()}</span>
+            </div>
+            <div>
                 <button
                     //Call the function prop onBackClick when the button click occurs.
                     onClick={onBackClick}
@@ -63,6 +68,7 @@ MovieView.propTypes = {
         director: PropTypes.shape({
             directorName: PropTypes.string.isRequired,
         }),
+        featured: PropTypes.bool.isRequired,
     }).isRequired,
     onBackClick: PropTypes.func.isRequired,
 };

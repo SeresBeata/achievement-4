@@ -1,3 +1,6 @@
+// Import PropTypes
+import PropTypes from 'prop-types';
+
 //Create MovieView child component
 //Pass data and function from parent component (MainView) to the child component (MovieView) by using props
 //Export the created child component MovieView, and return data about current movie in case of click event
@@ -37,6 +40,11 @@ export const MovieView = ({ movie, onBackClick }) => {
                 <p>{movie.description}</p>
             </div>
             <div>
+                {/* to convert "featured" boolean to string*/}
+                <span>Featured: </span>
+                <span>{movie.featured.toString()}</span>
+            </div>
+            <div>
                 <button
                     //Call the function prop onBackClick when the button click occurs.
                     onClick={onBackClick}
@@ -46,4 +54,21 @@ export const MovieView = ({ movie, onBackClick }) => {
             </div>
         </div>
     );
+};
+
+//Define all the props constraints for the MovieView
+MovieView.propTypes = {
+    movie: PropTypes.shape({
+        imagePath: PropTypes.string.isRequired,
+        title: PropTypes.string.isRequired,
+        genre: PropTypes.shape({
+            genreName: PropTypes.string.isRequired,
+        }),
+        description: PropTypes.string.isRequired,
+        director: PropTypes.shape({
+            directorName: PropTypes.string.isRequired,
+        }),
+        featured: PropTypes.bool.isRequired,
+    }).isRequired,
+    onBackClick: PropTypes.func.isRequired,
 };

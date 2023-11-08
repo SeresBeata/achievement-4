@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { MovieCard } from '../movie-card/MovieCard';
 import { MovieView } from '../movie-view/MovieView';
 import { LoginView } from '../login-view/LoginView';
+import { SignupView } from '../signup-view/SignupView';
 
 //Export the created MainView component
 export const MainView = () => {
@@ -52,16 +53,20 @@ export const MainView = () => {
             });
     }, [token]);
 
-    //Use cobditional statement, if no user is logged in, then return the LoginView child component
+    //Use conditional statement, if no user is logged in, then return the LoginView and SignupView child component
     //With it the user have to login in before being able to see the movies of MyFlix.
     if (!user) {
         return (
-            <LoginView
-                onLoggedIn={(user, token) => {
-                    setUser(user);
-                    setToken(token);
-                }}
-            />
+            <>
+                <LoginView
+                    onLoggedIn={(user, token) => {
+                        setUser(user);
+                        setToken(token);
+                    }}
+                />
+                or
+                <SignupView />
+            </>
         );
     }
 

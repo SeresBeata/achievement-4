@@ -7,6 +7,8 @@ import { MovieView } from '../movie-view/MovieView';
 export const MainView = () => {
     //Use "useState" to declare a "state variable", called movies. Pass the initial state (which is an empty array) as an argument to the useState().
     const [movies, setMovies] = useState([]);
+    //Create state variable, called selectedMovie, where the initial value of selectedMovie state is null.
+    const [selectedMovie, setSelectedMovie] = useState(null);
 
     //Fetch data from API and populate movies state using setMovies, with the fetched movies array from myFlix API
     useEffect(() => {
@@ -37,9 +39,6 @@ export const MainView = () => {
                 setMovies(moviesFromApi);
             });
     }, []);
-
-    //Create state variable, called selectedMovie, where the initial value of selectedMovie state is null.
-    const [selectedMovie, setSelectedMovie] = useState(null);
 
     //Use conditional statement, if selectedMovie is true, then return the MovieView child component
     if (selectedMovie) {

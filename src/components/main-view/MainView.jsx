@@ -6,10 +6,12 @@ import { LoginView } from '../login-view/LoginView';
 
 //Export the created MainView component
 export const MainView = () => {
+    const storedUser = JSON.parse(localStorage.getItem('user')); //Use getItem() to retrieve "user" from localStorage
+    const storedToken = localStorage.getItem('token'); //Use getItem() to retrieve "token" from localStorage
     //Create state variable, called user with initial stale "null". Use to check if user is logged in or not.
-    const [user, setUser] = useState(null);
+    const [user, setUser] = useState(storedUser ? storedUser : null);
     //Create state variable, called token with initial state "null". Use to store token.
-    const [token, setToken] = useState(null);
+    const [token, setToken] = useState(storedToken ? storedToken : null);
     //Use "useState" to declare a "state variable", called movies. Pass the initial state (which is an empty array) as an argument to the useState().
     const [movies, setMovies] = useState([]);
     //Create state variable, called selectedMovie, where the initial value of selectedMovie state is null.
@@ -100,11 +102,12 @@ export const MainView = () => {
                         />
                     );
                 })}
-                {/* Create btn for logout: nullify the token when the logout button is clicked. */}
+                {/* Create btn for logout: nullify the token when the logout button is clicked. And clear the localStorage too. */}
                 <button
                     onClick={() => {
                         setUser(null);
                         setToken(null);
+                        localStorage.clear();
                     }}
                 >
                     Logout

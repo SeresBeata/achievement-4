@@ -100,6 +100,15 @@ export const MainView = () => {
                         />
                     );
                 })}
+                {/* Create btn for logout: nullify the token when the logout button is clicked. */}
+                <button
+                    onClick={() => {
+                        setUser(null);
+                        setToken(null);
+                    }}
+                >
+                    Logout
+                </button>
             </div>
         </>
     );

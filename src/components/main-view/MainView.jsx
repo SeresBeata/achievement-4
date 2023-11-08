@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import { MovieCard } from '../movie-card/MovieCard';
 import { MovieView } from '../movie-view/MovieView';
+import { LoginView } from '../login-view/LoginView';
 
 //Export the created MainView component
 export const MainView = () => {
@@ -9,10 +10,19 @@ export const MainView = () => {
     const [movies, setMovies] = useState([]);
     //Create state variable, called selectedMovie, where the initial value of selectedMovie state is null.
     const [selectedMovie, setSelectedMovie] = useState(null);
+    //Create state variable, called user with initial stale "null". Use to check if user is logged in or not.
+    const [user, setUser] = useState(null);
+    //Create state variable, called token with initial state "null". Use to store token.
+    const [token, setToken] = useState(null);
 
     //Fetch data from API and populate movies state using setMovies, with the fetched movies array from myFlix API
     useEffect(() => {
-        fetch('https://movieapi-myflix.onrender.com/movies')
+        if (!token) {
+            return;
+        }
+        fetch('https://movieapi-myflix.onrender.com/movies', {
+            headers: { Authorization: `Bearer ${token}` },
+        })
             .then((response) => response.json())
             .then((data) => {
                 console.log(data);
@@ -38,7 +48,20 @@ export const MainView = () => {
                 });
                 setMovies(moviesFromApi);
             });
-    }, []);
+    }, [token]);
+
+    //Use cobditional statement, if no user is logged in, then return the LoginView child component
+    //With it the user have to login in before being able to see the movies of MyFlix.
+    if (!user) {
+        return (
+            <LoginView
+                onLoggedIn={(user, token) => {
+                    setUser(user);
+                    setToken(token);
+                }}
+            />
+        );
+    }
 
     //Use conditional statement, if selectedMovie is true, then return the MovieView child component
     if (selectedMovie) {

@@ -2,15 +2,30 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import { MovieCard } from '../movie-card/MovieCard';
 import { MovieView } from '../movie-view/MovieView';
+import { LoginView } from '../login-view/LoginView';
+import { SignupView } from '../signup-view/SignupView';
 
 //Export the created MainView component
 export const MainView = () => {
+    const storedUser = JSON.parse(localStorage.getItem('user')); //Use getItem() to retrieve "user" from localStorage
+    const storedToken = localStorage.getItem('token'); //Use getItem() to retrieve "token" from localStorage
+    //Create state variable, called user with initial stale "null". Use to check if user is logged in or not.
+    const [user, setUser] = useState(storedUser ? storedUser : null);
+    //Create state variable, called token with initial state "null". Use to store token.
+    const [token, setToken] = useState(storedToken ? storedToken : null);
     //Use "useState" to declare a "state variable", called movies. Pass the initial state (which is an empty array) as an argument to the useState().
     const [movies, setMovies] = useState([]);
+    //Create state variable, called selectedMovie, where the initial value of selectedMovie state is null.
+    const [selectedMovie, setSelectedMovie] = useState(null);
 
     //Fetch data from API and populate movies state using setMovies, with the fetched movies array from myFlix API
     useEffect(() => {
-        fetch('https://movieapi-myflix.onrender.com/movies')
+        if (!token) {
+            return;
+        }
+        fetch('https://movieapi-myflix.onrender.com/movies', {
+            headers: { Authorization: `Bearer ${token}` },
+        })
             .then((response) => response.json())
             .then((data) => {
                 console.log(data);
@@ -36,10 +51,24 @@ export const MainView = () => {
                 });
                 setMovies(moviesFromApi);
             });
-    }, []);
+    }, [token]);
 
-    //Create state variable, called selectedMovie, where the initial value of selectedMovie state is null.
-    const [selectedMovie, setSelectedMovie] = useState(null);
+    //Use conditional statement, if no user is logged in, then return the LoginView and SignupView child component
+    //With it the user have to login in before being able to see the movies of MyFlix.
+    if (!user) {
+        return (
+            <>
+                <LoginView
+                    onLoggedIn={(user, token) => {
+                        setUser(user);
+                        setToken(token);
+                    }}
+                />
+                or
+                <SignupView />
+            </>
+        );
+    }
 
     //Use conditional statement, if selectedMovie is true, then return the MovieView child component
     if (selectedMovie) {
@@ -78,6 +107,16 @@ export const MainView = () => {
                         />
                     );
                 })}
+                {/* Create btn for logout: nullify the token when the logout button is clicked. And clear the localStorage too. */}
+                <button
+                    onClick={() => {
+                        setUser(null);
+                        setToken(null);
+                        localStorage.clear();
+                    }}
+                >
+                    Logout
+                </button>
             </div>
         </>
     );

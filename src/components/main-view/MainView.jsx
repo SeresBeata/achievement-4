@@ -95,7 +95,10 @@ export const MainView = () => {
             ) : (
                 //Return the heading with the titles of movies
                 <>
-                    <h1>Movies</h1>
+                    <div style={{ textAlign: 'center', margin: '15px' }}>
+                        <h1>Movies</h1>
+                    </div>
+
                     {/* Use the map() method to iterate through movies array items*/}
                     {movies.map((movie) => (
                         //Pass data from parent component (MainView) to a child component (MovieCard) by using prop, called "movie".

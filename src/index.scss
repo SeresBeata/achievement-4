@@ -15,3 +15,22 @@ $text-color-primary: #ede0df;
 $text-color-secondary: #cca49f;
 /* End: Color Palette */
 
+/*Tag selectors: Start*/
+body {
+    background-color: $base-color-primary;
+}
+
+div {
+    color: $text-color-primary;
+}
+
+h1,
+h3 {
+    color: $brand-color-primary;
+}
+
+img {
+    width: 100%;
+}
+/*End: Tag selectors*/
+

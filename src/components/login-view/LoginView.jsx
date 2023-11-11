@@ -1,4 +1,6 @@
 import { useState } from 'react';
+//Import components from React Bootstrap
+import { Form, Button } from 'react-bootstrap';
 
 //Create LoginView child component
 //Pass function from parent component (MainView) to the child component (LoginView) by using prop
@@ -43,29 +45,34 @@ export const LoginView = ({ onLoggedIn }) => {
 
     //Return Login form
     return (
-        <form onSubmit={handleSubmit}>
-            <label>
-                Username:
-                <input
+        <Form onSubmit={handleSubmit}>
+            <Form.Group controlId="formUsername">
+                <Form.Label>Username:</Form.Label>
+                <Form.Control
                     type="text"
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
                     required
                     minLength="5"
+                    placeholder="Your Username"
                 />
-            </label>
-            <label>
-                Password:
-                <input
+            </Form.Group>
+
+            <Form.Group controlId="formPassword">
+                <Form.Label>Password:</Form.Label>
+                <Form.Control
                     type="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
                     minLength="5"
                     maxLength="10"
+                    placeholder="Your Password"
                 />
-            </label>
-            <button type="submit">Submit</button>
-        </form>
+            </Form.Group>
+            <Button variant="primary" type="submit">
+                Submit
+            </Button>
+        </Form>
     );
 };

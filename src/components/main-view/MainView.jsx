@@ -83,14 +83,7 @@ export const MainView = () => {
                 </Col>
             ) : selectedMovie ? (
                 //Use ternary operator: if selectedMovie is true, then return the MovieView child component
-                <Col
-                    lg={6}
-                    md={8}
-                    sm={12}
-                    xs={12}
-                    style={{ border: '1px solid green' }}
-                    className="movie-view--bg"
-                >
+                <Col lg={6} md={8} sm={12} xs={12} className="movie-view--bg">
                     <MovieView
                         movie={selectedMovie}
                         //Pass a function from the MainView component to MovieView as a prop called onBackClick that executes setSelectedMovies(), setting the value of selectedMovie to the initial state value, null.

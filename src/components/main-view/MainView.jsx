@@ -4,6 +4,16 @@ import { MovieCard } from '../movie-card/MovieCard';
 import { MovieView } from '../movie-view/MovieView';
 import { LoginView } from '../login-view/LoginView';
 import { SignupView } from '../signup-view/SignupView';
+//Import components from React Bootstrap
+import {
+    Row,
+    Col,
+    Button,
+    Nav,
+    Navbar,
+    NavDropdown,
+    Container,
+} from 'react-bootstrap';
 
 //Export the created MainView component
 export const MainView = () => {
@@ -53,71 +63,111 @@ export const MainView = () => {
             });
     }, [token]);
 
-    //Use conditional statement, if no user is logged in, then return the LoginView and SignupView child component
-    //With it the user have to login in before being able to see the movies of MyFlix.
-    if (!user) {
-        return (
-            <>
-                <LoginView
-                    onLoggedIn={(user, token) => {
-                        setUser(user);
-                        setToken(token);
-                    }}
-                />
-                or
-                <SignupView />
-            </>
-        );
-    }
-
-    //Use conditional statement, if selectedMovie is true, then return the MovieView child component
-    if (selectedMovie) {
-        return (
-            <MovieView
-                movie={selectedMovie}
-                //Pass a function from the MainView component to MovieView as a prop called onBackClick that executes setSelectedMovies(), setting the value of selectedMovie to the initial state value, null.
-                onBackClick={() => setSelectedMovie(null)}
-            />
-        );
-    }
-
-    //If movies array is empty, return message "The list is empty!"
-    if (movies.length === 0) {
-        return <div>The list is empty!</div>;
-    }
-
-    //Return the <h1> with the titles of movies
+    //Use ternary operator depending on what to return:
     return (
-        <>
-            <h1>Movies</h1>
-            <div>
-                {/* Use the map() method to iterate through movies array items*/}
-                {movies.map((movie) => {
-                    {
-                        /* Pass data from parent component (MainView) to a child component (MovieCard) by using prop, called "movie". */
-                        /* Pass a function from the MainView component to MoveCard as a prop called onMovieClick that executes setSelectedMovies(). */
-                    }
-                    return (
-                        <MovieCard
+        <Row className="justify-content-md-center justify-content-sm-center">
+            {/*Use ternary operator: if no user is logged in, then return the LoginView and SignupView child component. 
+            With it the user have to login in before being able to see the movies of MyFlix. */}
+            {!user ? (
+                <Col lg={4} md={6} sm={12} xs={12}>
+                    <h3>Login:</h3>
+                    <LoginView
+                        onLoggedIn={(user, token) => {
+                            setUser(user);
+                            setToken(token);
+                        }}
+                    />
+                    or
+                    <h3>Signup:</h3>
+                    <SignupView />
+                </Col>
+            ) : selectedMovie ? (
+                //Use ternary operator: if selectedMovie is true, then return the MovieView child component
+                <Col lg={6} md={8} sm={12} xs={12} className="movie-view--bg">
+                    <MovieView
+                        movie={selectedMovie}
+                        //Pass a function from the MainView component to MovieView as a prop called onBackClick that executes setSelectedMovies(), setting the value of selectedMovie to the initial state value, null.
+                        onBackClick={() => setSelectedMovie(null)}
+                    />
+                </Col>
+            ) : movies.length === 0 ? (
+                // Use ternary operator: if movies array is empty, return message "The list is empty!"
+                <div>The list is empty!</div>
+            ) : (
+                //Return the heading with the titles of movies
+                <>
+                    <Navbar expand="lg" className="navbar-bg">
+                        <Container>
+                            <Navbar.Brand
+                                href="#home"
+                                style={{ color: '#fbd6da' }}
+                            >
+                                myFlix
+                            </Navbar.Brand>
+                            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                            <Navbar.Collapse id="basic-navbar-nav">
+                                <Nav className="me-auto">
+                                    <Nav.Link href="#home">Home</Nav.Link>
+                                    <Nav.Link href="#link">Link</Nav.Link>
+                                    <NavDropdown
+                                        title="Dropdown"
+                                        id="basic-nav-dropdown"
+                                    >
+                                        <NavDropdown.Item href="#action/3.1">
+                                            Action
+                                        </NavDropdown.Item>
+                                        <NavDropdown.Item href="#action/3.2">
+                                            Another action
+                                        </NavDropdown.Item>
+                                        <NavDropdown.Item href="#action/3.3">
+                                            Something
+                                        </NavDropdown.Item>
+                                        <NavDropdown.Divider />
+                                        <NavDropdown.Item href="#action/3.4">
+                                            Separated link
+                                        </NavDropdown.Item>
+                                    </NavDropdown>
+                                </Nav>
+                            </Navbar.Collapse>
+                        </Container>
+                    </Navbar>
+
+                    <div style={{ textAlign: 'center', margin: '15px' }}>
+                        <h1>Movies</h1>
+                    </div>
+
+                    {/* Use the map() method to iterate through movies array items*/}
+                    {movies.map((movie) => (
+                        //Pass data from parent component (MainView) to a child component (MovieCard) by using prop, called "movie".
+                        //Pass a function from the MainView component to MoveCard as a prop called onMovieClick that executes setSelectedMovies().
+                        <Col
                             key={movie._id}
-                            movie={movie}
-                            onMovieClick={(newSelectedMovie) =>
-                                setSelectedMovie(newSelectedMovie)
-                            }
-                        />
-                    );
-                })}
-                {/* Create btn for logout: nullify the token when the logout button is clicked. And clear the localStorage too. */}
-                <button
-                    onClick={() => {
-                        setUser(null);
-                        setToken(null);
-                        localStorage.clear();
-                    }}
-                >
-                    Logout
-                </button>
-            </div>
-        </>
+                            className="mb-4"
+                            lg={3}
+                            md={4}
+                            sm={6}
+                            xs={12}
+                        >
+                            <MovieCard
+                                movie={movie}
+                                onMovieClick={(newSelectedMovie) => {
+                                    setSelectedMovie(newSelectedMovie);
+                                }}
+                            />
+                        </Col>
+                    ))}
+
+                    <Button //Create btn for logout: nullify the token when the logout button is clicked. And clear the localStorage too.
+                        onClick={() => {
+                            setUser(null);
+                            setToken(null);
+                            localStorage.clear();
+                        }}
+                    >
+                        Logout
+                    </Button>
+                </>
+            )}
+        </Row>
     );
 };

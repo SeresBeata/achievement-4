@@ -1,4 +1,6 @@
 import { useState } from 'react';
+//Import components from React Bootstrap
+import { Form, Button } from 'react-bootstrap';
 
 //Create SignupView child component
 //Export the created child component SignupView, and return register form
@@ -38,47 +40,66 @@ export const SignupView = () => {
 
     //Return register form
     return (
-        <form onSubmit={handleSubmit}>
-            <label>
-                Username:
-                <input
+        <Form onSubmit={handleSubmit}>
+            <Form.Group controlId="formUsername">
+                <Form.Label>Username:</Form.Label>
+                <Form.Control
                     type="text"
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
                     required
                     minLength="5"
+                    placeholder="Your Username"
                 />
-            </label>
-            <label>
-                Password:
-                <input
+                <Form.Text>
+                    Please, enter a Username of at least 5 characters.
+                </Form.Text>
+            </Form.Group>
+
+            <Form.Group controlId="formPassword">
+                <Form.Label>Password:</Form.Label>
+                <Form.Control
                     type="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
+                    placeholder="Your Password"
                     minLength="5"
                     maxLength="10"
                 />
-            </label>
-            <label>
-                Email:
-                <input
+                <Form.Text>
+                    Please, enter a Password of at least 5 and maximum 10
+                    characters.
+                </Form.Text>
+            </Form.Group>
+
+            <Form.Group controlId="formBasicEmail">
+                <Form.Label>Email address</Form.Label>
+                <Form.Control
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
+                    placeholder="Enter email"
                 />
-            </label>
-            <label>
-                Birthday:
-                <input
+                <Form.Text>
+                    We'll never share your email with anyone else.
+                </Form.Text>
+            </Form.Group>
+
+            <Form.Group>
+                <Form.Label>Birthday:</Form.Label>
+                <Form.Control
                     type="date"
                     value={birthday}
                     onChange={(e) => setBirthday(e.target.value)}
-                    required
                 />
-            </label>
-            <button type="submit">Submit</button>
-        </form>
+                <Form.Text>Entering your birthday is optional.</Form.Text>
+            </Form.Group>
+
+            <Button variant="primary" type="submit">
+                Submit
+            </Button>
+        </Form>
     );
 };

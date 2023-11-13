@@ -1,5 +1,7 @@
 // Import PropTypes
 import PropTypes from 'prop-types';
+//Import components from React Bootstrap
+import { Button } from 'react-bootstrap';
 
 //Create MovieView child component
 //Pass data and function from parent component (MainView) to the child component (MovieView) by using props
@@ -8,7 +10,11 @@ export const MovieView = ({ movie, onBackClick }) => {
     return (
         <div>
             <div>
-                <img src={movie.imagePath} alt="Poster of the movie." />
+                <img
+                    className="movie-view--img"
+                    src={movie.imagePath}
+                    alt="Poster of the movie."
+                />
             </div>
             <div>
                 <h3>
@@ -45,12 +51,11 @@ export const MovieView = ({ movie, onBackClick }) => {
                 <span>{movie.featured.toString()}</span>
             </div>
             <div>
-                <button
-                    //Call the function prop onBackClick when the button click occurs.
+                <Button //Call the function prop onBackClick when the button click occurs.
                     onClick={onBackClick}
                 >
                     Back
-                </button>
+                </Button>
             </div>
         </div>
     );

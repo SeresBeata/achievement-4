@@ -1,9 +1,66 @@
-$color: steelblue;
+//Use built-in variables for customization of form
+$primary: #bf6466;
+$body-bg: #fbd6da;
+//Import Bootstrap Sass file for customization
+@import '~bootstrap/scss/bootstrap.scss';
 
-.my-flix {
-    color: $color;
-}
+/* Color Palette Start */
+$brand-color-primary: #bf6466;
+$brand-color-secondory: #fbd6da;
+$base-color-primary: #2c2425;
+$base-color-secondary: #362929;
+$base-color-secondary-light: #6a4f4d;
+$animation-color-front: #2e3744;
+$text-color-primary: #ede0df;
+$text-color-secondary: #cca49f;
+/* End: Color Palette */
 
+/*Tag selectors: Start*/
 body {
-    background-color: #ffcf96;
+    background-color: $base-color-primary;
 }
+
+div {
+    color: $text-color-primary;
+}
+
+h1,
+h3 {
+    color: $brand-color-primary;
+}
+
+img {
+    width: 100%;
+}
+/*End: Tag selectors*/
+
+//Use built-in class selectors: Start
+.form-control:focus {
+    box-shadow: 0 0 0 0.25rem lighten($brand-color-primary, 10%);
+    //border-color: grey;
+}
+
+.form-text {
+    color: $text-color-secondary;
+}
+//End: Use built-in class selector
+
+/*Class selectors: Start*/
+.movie-view--img {
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.movie-view--bg {
+    background-color: darken($base-color-primary, 5%);
+}
+
+.movie-card--bg {
+    background-color: $brand-color-secondory;
+}
+
+.navbar-bg {
+    background-color: $base-color-secondary-light;
+    border-radius: 5px;
+}
+/*End: Class selectors*/

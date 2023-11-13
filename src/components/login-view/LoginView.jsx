@@ -20,7 +20,7 @@ export const LoginView = ({ onLoggedIn }) => {
         };
 
         //Use fetch() method for "/login" endpoint of myFlix API
-        fetch('https://movieapi-myflix.onrender.com/login', {
+        fetch('https://movie-myflix-c346f5fde8cf.herokuapp.com/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

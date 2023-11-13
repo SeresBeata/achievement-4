@@ -33,7 +33,7 @@ export const MainView = () => {
         if (!token) {
             return;
         }
-        fetch('https://movieapi-myflix.onrender.com/movies', {
+        fetch('https://movie-myflix-c346f5fde8cf.herokuapp.com/movies', {
             headers: { Authorization: `Bearer ${token}` },
         })
             .then((response) => response.json())

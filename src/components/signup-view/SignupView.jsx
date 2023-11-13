@@ -22,7 +22,7 @@ export const SignupView = () => {
         };
 
         //Use fetch() method for "/users" endpoint of myFlix API
-        fetch('https://movieapi-myflix.onrender.com/users', {
+        fetch('https://movie-myflix-c346f5fde8cf.herokuapp.com/users', {
             method: 'POST',
             body: JSON.stringify(data),
             headers: {

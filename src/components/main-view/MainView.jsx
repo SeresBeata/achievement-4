@@ -8,6 +8,8 @@ import { SignupView } from '../signup-view/SignupView';
 import { Row, Col, Button } from 'react-bootstrap';
 //import from react-router-dom
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+//import navbar child component
+import { NavigationBar } from '../navigation-bar/NavigationBar';
 
 //Export the created MainView component
 export const MainView = () => {
@@ -60,6 +62,15 @@ export const MainView = () => {
     //Use state-based router & ternary operator depending on what to return:
     return (
         <BrowserRouter>
+            {/* Create Navbar */}
+            <NavigationBar //Nullify the token when the logout button is clicked. And clear the localStorage too.
+                user={user}
+                onLoggedOut={() => {
+                    setUser(null);
+                    setToken(null);
+                    localStorage.clear();
+                }}
+            />
             <Row className="justify-content-md-center justify-content-sm-center">
                 <Routes>
                     {/* Use the <Route> components of react-router-dom for state-based router.  */}

@@ -6,6 +6,8 @@ import { LoginView } from '../login-view/LoginView';
 import { SignupView } from '../signup-view/SignupView';
 //Import components from React Bootstrap
 import { Row, Col, Button } from 'react-bootstrap';
+//import from react-router-dom
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
 //Export the created MainView component
 export const MainView = () => {
@@ -54,4 +56,111 @@ export const MainView = () => {
                 setMovies(moviesFromApi);
             });
     }, [token]);
+
+    //Use state-based router & ternary operator depending on what to return:
+    return (
+        <BrowserRouter>
+            <Row className="justify-content-md-center justify-content-sm-center">
+                <Routes>
+                    {/* Use the <Route> components of react-router-dom for state-based router.  */}
+                    {/* Create 4 routes for signup, login, selected-movie and all-movies  */}
+                    <Route
+                        path="/signup"
+                        element={
+                            <>
+                                {/* Use ternary operator: if user is "truthy" then navigate to "/", if user is "falsy", then return the SignupView child component. */}
+                                {user ? (
+                                    <Navigate to="/" />
+                                ) : (
+                                    <Col lg={4} md={6} sm={12} xs={12}>
+                                        <h3>Signup:</h3>
+                                        <SignupView />
+                                    </Col>
+                                )}
+                            </>
+                        }
+                    />
+                    <Route
+                        path="/login"
+                        element={
+                            <>
+                                {/* Use ternary operator: if user is "truthy" then navigate to "/", if user is "falsy", then return the LoginView child component. */}
+                                {user ? (
+                                    <Navigate to="/" />
+                                ) : (
+                                    <Col lg={4} md={6} sm={12} xs={12}>
+                                        <h3>Login:</h3>
+                                        <LoginView
+                                            onLoggedIn={(user, token) => {
+                                                setUser(user);
+                                                setToken(token);
+                                            }}
+                                        />
+                                    </Col>
+                                )}
+                            </>
+                        }
+                    />
+                    <Route
+                        path="/movies/:movieId"
+                        element={
+                            <>
+                                {/* Use ternary operator: if user is "falsy" then navigate to "/login". */}
+                                {!user ? (
+                                    //Use replace options property, to redirect to "/login".
+                                    <Navigate to="/login" replace />
+                                ) : movies.length === 0 ? (
+                                    //if movies array is empty, return message "The list is empty!
+                                    <Col>The list is empty!</Col>
+                                ) : (
+                                    //return the MovieView child component
+                                    <Col
+                                        lg={6}
+                                        md={8}
+                                        sm={12}
+                                        xs={12}
+                                        className="movie-view--bg"
+                                    >
+                                        <MovieView movies={movies} />
+                                    </Col>
+                                )}
+                            </>
+                        }
+                    />
+                    <Route
+                        path="/"
+                        element={
+                            <>
+                                {/* Use ternary operator: if user is "falsy" then navigate to "/login". */}
+                                {!user ? (
+                                    //Use replace options property, to redirect to "/login".
+                                    <Navigate to="/login" replace />
+                                ) : movies.length === 0 ? (
+                                    //if movies array is empty, return message "The list is empty!
+                                    <Col>The list is empty!</Col>
+                                ) : (
+                                    <>
+                                        {/* Use the map() method to iterate through movies array items*/}
+                                        {movies.map((movie) => (
+                                            //return the MovieCard child component
+                                            <Col
+                                                key={movie._id}
+                                                className="mb-4"
+                                                lg={3}
+                                                md={4}
+                                                sm={6}
+                                                xs={12}
+                                            >
+                                                <MovieCard movie={movie} />
+                                            </Col>
+                                        ))}
+                                    </>
+                                )}
+                            </>
+                        }
+                    />
+                </Routes>
+            </Row>
+        </BrowserRouter>
+    );
 };

@@ -184,7 +184,12 @@ export const MainView = () => {
                                 ) : (
                                     //return the ProfileView child component
                                     <Col>
-                                        <ProfileView
+                                        <ProfileView user={user} />
+                                    </Col>
+                                )}
+                            </>
+                        }
+                    />
                                             user={user}
                                             movies={movies}
                                         />

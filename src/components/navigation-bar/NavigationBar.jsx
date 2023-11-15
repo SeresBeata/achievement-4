@@ -43,7 +43,12 @@ export const NavigationBar = ({ user, onLoggedOut }) => {
                                     title="Profile"
                                     id="basic-nav-dropdown"
                                 >
-                                    <NavDropdown.Item>
+                                    <NavDropdown.Item
+                                        as={Link}
+                                        to={`/users/${encodeURIComponent(
+                                            user._id
+                                        )}`}
+                                    >
                                         See Profile
                                     </NavDropdown.Item>
                                     <NavDropdown.Item>

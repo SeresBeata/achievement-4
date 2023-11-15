@@ -40,21 +40,21 @@ export const NavigationBar = ({ user, onLoggedOut }) => {
                                     Logout
                                 </Nav.Link>
                                 <NavDropdown
-                                    title="Dropdown"
+                                    title="Profile"
                                     id="basic-nav-dropdown"
                                 >
-                                    <NavDropdown.Item href="#action/3.1">
-                                        Action
+                                    <NavDropdown.Item>
+                                        See Profile
                                     </NavDropdown.Item>
-                                    <NavDropdown.Item href="#action/3.2">
-                                        Another action
+                                    <NavDropdown.Item>
+                                        Update Profile
                                     </NavDropdown.Item>
-                                    <NavDropdown.Item href="#action/3.3">
-                                        Something
+                                    <NavDropdown.Item>
+                                        Favourite Movies
                                     </NavDropdown.Item>
                                     <NavDropdown.Divider />
-                                    <NavDropdown.Item href="#action/3.4">
-                                        Separated link
+                                    <NavDropdown.Item>
+                                        Delete Account
                                     </NavDropdown.Item>
                                 </NavDropdown>
                             </>

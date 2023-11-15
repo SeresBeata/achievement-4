@@ -10,6 +10,8 @@ import { Row, Col, Button } from 'react-bootstrap';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 //import navbar child component
 import { NavigationBar } from '../navigation-bar/NavigationBar';
+//import ProfileView child component
+import { ProfileView } from '../profile-view/ProfileView';
 
 //Export the created MainView component
 export const MainView = () => {
@@ -166,6 +168,27 @@ export const MainView = () => {
                                             </Col>
                                         ))}
                                     </>
+                                )}
+                            </>
+                        }
+                    />
+                    {/* Create further routes for profile, favMovie, update-profile and del-account: */}
+                    <Route
+                        path="users/:userId"
+                        element={
+                            <>
+                                {/* Use ternary operator: if user is "falsy" then navigate to "/login". */}
+                                {!user ? (
+                                    //Use replace options property, to redirect to "/login".
+                                    <Navigate to="/login" replace />
+                                ) : (
+                                    //return the ProfileView child component
+                                    <Col>
+                                        <ProfileView
+                                            user={user}
+                                            movies={movies}
+                                        />
+                                    </Col>
                                 )}
                             </>
                         }

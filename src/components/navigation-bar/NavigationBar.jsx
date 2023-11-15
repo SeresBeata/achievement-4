@@ -54,7 +54,12 @@ export const NavigationBar = ({ user, onLoggedOut }) => {
                                     <NavDropdown.Item>
                                         Update Profile
                                     </NavDropdown.Item>
-                                    <NavDropdown.Item>
+                                    <NavDropdown.Item
+                                        as={Link}
+                                        to={`/users/favMovies/${encodeURIComponent(
+                                            user._id
+                                        )}`}
+                                    >
                                         Favourite Movies
                                     </NavDropdown.Item>
                                     <NavDropdown.Divider />

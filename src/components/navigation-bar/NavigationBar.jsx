@@ -6,12 +6,16 @@ import { Link } from 'react-router-dom';
 //Create NavigationBar child component and export it
 export const NavigationBar = ({ user, onLoggedOut }) => {
     return (
-        <Navbar expand="lg" className="navbar-bg navbar-dark">
+        <Navbar
+            expand="lg"
+            className="navbar-bg navbar-dark"
+            style={{ marginBottom: '20px' }}
+        >
             <Container>
                 <Navbar.Brand
                     as={Link}
                     to="/"
-                    style={{ color: '#fbd6da', fontWeight: 'bolder' }}
+                    style={{ color: '#ff1a1a', fontWeight: 'bolder' }}
                 >
                     myFlix
                 </Navbar.Brand>

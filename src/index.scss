@@ -1,18 +1,17 @@
 //Use built-in variables for customization of form
-$primary: #bf6466;
-$body-bg: #fbd6da;
+$primary: #ff1a1a;
+$body-bg: #7b6a6b;
 //Import Bootstrap Sass file for customization
 @import '~bootstrap/scss/bootstrap.scss';
 
 /* Color Palette Start */
-$brand-color-primary: #bf6466;
-$brand-color-secondory: #fbd6da;
-$base-color-primary: #2c2425;
-$base-color-secondary: #362929;
-$base-color-secondary-light: #6a4f4d;
-$animation-color-front: #2e3744;
+$brand-color-primary: #ff1a1a;
+$brand-color-secondary: #635f5f;
+$base-color-primary: #1a0000;
+$base-color-secondary: #322b2b;
+$base-color-secondary-light: #4d4b4b;
 $text-color-primary: #ede0df;
-$text-color-secondary: #cca49f;
+$text-color-secondary: #e3aca8;
 /* End: Color Palette */
 
 /*Tag selectors: Start*/
@@ -41,7 +40,7 @@ img {
 }
 
 .form-text {
-    color: $text-color-secondary;
+    color: $brand-color-secondary;
 }
 //End: Use built-in class selector
 
@@ -56,11 +55,11 @@ img {
 }
 
 .movie-card--bg {
-    background-color: $brand-color-secondory;
+    background-color: $brand-color-secondary;
 }
 
 .navbar-bg {
-    background-color: $base-color-secondary-light;
+    background-color: $base-color-secondary;
     border-radius: 5px;
 }
 /*End: Class selectors*/

@@ -17,7 +17,7 @@ export const ProfileView = ({ user }) => {
                 >
                     <Card.Header
                         style={{
-                            backgroundColor: '#bf6466',
+                            backgroundColor: '#322b2b',
                             color: '#ede0df',
                             fontWeight: 'bolder',
                         }}

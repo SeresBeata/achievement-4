@@ -14,9 +14,20 @@ import { NavigationBar } from '../navigation-bar/NavigationBar';
 import { ProfileView } from '../profile-view/ProfileView';
 //import FavMovieView child component
 import { FavMovieView } from '../favMovie-view/FavMovieView';
+//import scss
+import './main-view.scss';
 
 //Export the created MainView component
 export const MainView = () => {
+    //adds backdrop for login view and gets rid of it once user logs in
+    useEffect(() => {
+        if (!user) {
+            document.body.classList.add('login-backdrop');
+        } else {
+            document.body.classList.remove('login-backdrop');
+        }
+    });
+
     const storedUser = JSON.parse(localStorage.getItem('user')); //Use getItem() to retrieve "user" from localStorage
     const storedToken = localStorage.getItem('token'); //Use getItem() to retrieve "token" from localStorage
     //Create state variable, called user with initial stale "null". Use to check if user is logged in or not.

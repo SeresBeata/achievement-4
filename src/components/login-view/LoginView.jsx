@@ -1,6 +1,8 @@
 import { useState } from 'react';
 //Import components from React Bootstrap
 import { Form, Button } from 'react-bootstrap';
+//import scss
+import './login-view.scss';
 
 //Create LoginView child component
 //Pass function from parent component (MainView) to the child component (LoginView) by using prop
@@ -45,7 +47,18 @@ export const LoginView = ({ onLoggedIn }) => {
 
     //Return Login form
     return (
-        <Form onSubmit={handleSubmit}>
+        <Form
+            onSubmit={handleSubmit}
+            style={{
+                background: 'rgba(0, 0, 0, 0.6)',
+                borderRadius: '5px',
+                padding: '20px',
+            }}
+            className="form-border"
+        >
+            <div className="div-heading">
+                <h3 className="form-heading">LOGIN</h3>
+            </div>
             <Form.Group controlId="formUsername">
                 <Form.Label>Username:</Form.Label>
                 <Form.Control
@@ -57,7 +70,6 @@ export const LoginView = ({ onLoggedIn }) => {
                     placeholder="Your Username"
                 />
             </Form.Group>
-
             <Form.Group controlId="formPassword">
                 <Form.Label>Password:</Form.Label>
                 <Form.Control
@@ -70,9 +82,19 @@ export const LoginView = ({ onLoggedIn }) => {
                     placeholder="Your Password"
                 />
             </Form.Group>
-            <Button variant="primary" type="submit">
-                Submit
-            </Button>
+            <div className="div-button">
+                <Button
+                    variant="primary"
+                    type="submit"
+                    style={{
+                        fontWeight: 'bolder',
+                        marginTop: '20px',
+                        textTransform: 'uppercase',
+                    }}
+                >
+                    Submit
+                </Button>
+            </div>
         </Form>
     );
 };

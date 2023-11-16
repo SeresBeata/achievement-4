@@ -88,7 +88,7 @@ export const MainView = () => {
                                     <Navigate to="/" />
                                 ) : (
                                     <Col lg={4} md={6} sm={12} xs={12}>
-                                        <h3>Signup:</h3>
+                                        {/* <h3>Signup:</h3> */}
                                         <SignupView />
                                     </Col>
                                 )}
@@ -104,7 +104,7 @@ export const MainView = () => {
                                     <Navigate to="/" />
                                 ) : (
                                     <Col lg={4} md={6} sm={12} xs={12}>
-                                        <h3>Login:</h3>
+                                        {/* <h3>Login:</h3> */}
                                         <LoginView
                                             onLoggedIn={(user, token) => {
                                                 setUser(user);

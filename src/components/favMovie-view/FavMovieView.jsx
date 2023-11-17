@@ -3,10 +3,10 @@ import { Row, Col, Card } from 'react-bootstrap';
 import { MovieCard } from '../movie-card/MovieCard';
 
 //Create FavMovieView child component and export it
-export const FavMovieView = ({ user, movies }) => {
+export const FavMovieView = ({ user, movies, token, setUser }) => {
     //filter the movies array
     let favoriteMovies = movies.filter((m) =>
-        user.favouriteMovies.includes(m._id)
+        JSON.stringify(user.favouriteMovies).includes(m._id)
     );
 
     console.log(favoriteMovies);
@@ -41,7 +41,12 @@ export const FavMovieView = ({ user, movies }) => {
                         sm={6}
                         xs={12}
                     >
-                        <MovieCard movie={movie} user={user} />
+                        <MovieCard
+                            movie={movie}
+                            user={user}
+                            token={token}
+                            setUser={setUser}
+                        />
                     </Col>
                 ))
             )}

@@ -177,7 +177,10 @@ export const MainView = () => {
                                                 sm={6}
                                                 xs={12}
                                             >
-                                                <MovieCard movie={movie} />
+                                                <MovieCard
+                                                    user={user}
+                                                    movie={movie}
+                                                />
                                             </Col>
                                         ))}
                                     </>

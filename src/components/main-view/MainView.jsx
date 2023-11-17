@@ -180,6 +180,8 @@ export const MainView = () => {
                                                 <MovieCard
                                                     user={user}
                                                     movie={movie}
+                                                    token={token}
+                                                    setUser={setUser}
                                                 />
                                             </Col>
                                         ))}
@@ -220,6 +222,8 @@ export const MainView = () => {
                                         <FavMovieView
                                             user={user}
                                             movies={movies}
+                                            token={token}
+                                            setUser={setUser}
                                         />
                                     </Col>
                                 )}

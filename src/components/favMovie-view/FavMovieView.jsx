@@ -41,7 +41,7 @@ export const FavMovieView = ({ user, movies }) => {
                         sm={6}
                         xs={12}
                     >
-                        <MovieCard movie={movie} />
+                        <MovieCard movie={movie} user={user} />
                     </Col>
                 ))
             )}

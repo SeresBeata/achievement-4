@@ -58,7 +58,12 @@ export const NavigationBar = ({ user, onLoggedOut }) => {
                                     >
                                         See Profile
                                     </NavDropdown.Item>
-                                    <NavDropdown.Item>
+                                    <NavDropdown.Item
+                                        as={Link}
+                                        to={`/users/update/${encodeURIComponent(
+                                            user._id
+                                        )}`}
+                                    >
                                         Update Profile
                                     </NavDropdown.Item>
                                     <NavDropdown.Item

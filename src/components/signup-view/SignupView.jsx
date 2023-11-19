@@ -32,10 +32,11 @@ export const SignupView = () => {
             },
         }).then((response) => {
             if (response.ok) {
-                alert('Signup successful');
-                window.location.reload();
+                alert('Signup successful!');
+                //window.location.reload();
+                window.location.assign('http://localhost:1234/login');
             } else {
-                alert('Signup failed');
+                alert('Signup failed!');
             }
         });
     };

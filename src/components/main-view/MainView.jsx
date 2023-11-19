@@ -244,7 +244,11 @@ export const MainView = () => {
                                 ) : (
                                     //return the UpdateProfileView child component
                                     <Col>
-                                        <UpdateProfileView />
+                                        <UpdateProfileView
+                                            user={user}
+                                            token={token}
+                                            setUser={setUser}
+                                        />
                                     </Col>
                                 )}
                             </>

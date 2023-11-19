@@ -70,13 +70,24 @@ export const UpdateProfileView = ({ user, token }) => {
                     <div className="div-heading">
                         <h3 className="form-heading">UPDATE PROFILE</h3>
                     </div>
+                    <div
+                        style={{
+                            textAlign: 'center',
+                            fontWeight: 'bolder',
+                            paddingBottom: '20px',
+                        }}
+                    >
+                        Please, fill the form to update the profile!
+                    </div>
                     <Form.Group
                         controlId="formUsername"
                         style={{ marginBottom: '10px' }}
                     >
                         <Form.Label>
                             Current Username:{' '}
-                            <span style={{ color: '#de4545' }}>
+                            <span
+                                style={{ color: '#de4545', paddingLeft: '5px' }}
+                            >
                                 {user.username}
                             </span>
                         </Form.Label>
@@ -86,7 +97,7 @@ export const UpdateProfileView = ({ user, token }) => {
                             onChange={(e) => setUsername(e.target.value)}
                             required
                             minLength="5"
-                            placeholder="Enter Your Updated Username"
+                            placeholder="Username"
                         />
                         <Form.Text>
                             Please, enter a Username of at least 5 characters.
@@ -103,7 +114,7 @@ export const UpdateProfileView = ({ user, token }) => {
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                             required
-                            placeholder="Enter Your Updated Password"
+                            placeholder="Password"
                             minLength="5"
                             maxLength="10"
                             className="password-placeholder"
@@ -119,8 +130,10 @@ export const UpdateProfileView = ({ user, token }) => {
                         style={{ marginBottom: '10px' }}
                     >
                         <Form.Label>
-                            Current Email address:{' '}
-                            <span style={{ color: '#de4545' }}>
+                            Current Email:{' '}
+                            <span
+                                style={{ color: '#de4545', paddingLeft: '5px' }}
+                            >
                                 {user.email}
                             </span>
                         </Form.Label>
@@ -129,22 +142,23 @@ export const UpdateProfileView = ({ user, token }) => {
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             required
-                            placeholder="Enter Your Updated Email"
+                            placeholder="Email"
                         />
                         <Form.Text>
-                            We'll never share your email with anyone else.
+                            Please, enter your Email! We'll never share your
+                            email with anyone else.
                         </Form.Text>
                     </Form.Group>
 
                     <Form.Group style={{ marginBottom: '10px' }}>
                         <Form.Label>
-                            Current Birthday:{' '}
-                            <span style={{ color: '#de4545' }}>
+                            Current date of Birth:{' '}
+                            <span
+                                style={{ color: '#de4545', paddingLeft: '5px' }}
+                            >
                                 {user.birthday.split('T')[0]}
                             </span>
                         </Form.Label>
-                        <br />
-                        <Form.Label>Enter Your Updated Birthday:</Form.Label>
                         <Form.Control
                             type="date"
                             value={birthday}
@@ -152,7 +166,8 @@ export const UpdateProfileView = ({ user, token }) => {
                             required
                         />
                         <Form.Text>
-                            We'll never share your birthday with anyone else.
+                            Please, enter your Birthday! We'll never share your
+                            birthday with anyone else.
                         </Form.Text>
                     </Form.Group>
                     <div className="div-button">
@@ -161,7 +176,7 @@ export const UpdateProfileView = ({ user, token }) => {
                             type="submit"
                             style={{
                                 fontWeight: 'bolder',
-                                marginTop: '20px',
+                                marginTop: '10px',
                                 textTransform: 'uppercase',
                             }}
                         >

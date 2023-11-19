@@ -37,11 +37,13 @@ export const LoginView = ({ onLoggedIn }) => {
                     localStorage.setItem('token', data.token); //use the localStorage to store the token
                     onLoggedIn(data.user, data.token); //pass the user and token back to MainView so they can be used in all the subsequent API requests.
                 } else {
-                    alert('No such user');
+                    alert(
+                        'Username or password is incorrect. Try again, please!'
+                    );
                 }
             })
             .catch((e) => {
-                alert('Something went wrong');
+                alert('Oh, sorry! Something went wrong. Please, try again!');
             });
     };
 

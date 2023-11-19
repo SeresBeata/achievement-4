@@ -75,7 +75,12 @@ export const NavigationBar = ({ user, onLoggedOut }) => {
                                         Favourite Movies
                                     </NavDropdown.Item>
                                     <NavDropdown.Divider />
-                                    <NavDropdown.Item>
+                                    <NavDropdown.Item
+                                        as={Link}
+                                        to={`/users/delete/${encodeURIComponent(
+                                            user._id
+                                        )}`}
+                                    >
                                         Delete Account
                                     </NavDropdown.Item>
                                 </NavDropdown>

@@ -2,6 +2,8 @@
 import { Navbar, Container, Nav, NavDropdown } from 'react-bootstrap';
 //Import from react-router-dom
 import { Link } from 'react-router-dom';
+//import scss
+import './navigation-bar.scss';
 
 //Create NavigationBar child component and export it
 export const NavigationBar = ({ user, onLoggedOut }) => {
@@ -16,6 +18,7 @@ export const NavigationBar = ({ user, onLoggedOut }) => {
                     as={Link}
                     to="/"
                     style={{ color: '#ff1a1a', fontWeight: 'bolder' }}
+                    className="navbar-brand"
                 >
                     myFlix
                 </Navbar.Brand>

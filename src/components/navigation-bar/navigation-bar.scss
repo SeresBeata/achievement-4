@@ -1,0 +1,11 @@
+.navbar-brand {
+    color: #ff1a1a;
+    animation: Color 5s infinite;
+}
+
+//animation of h3:
+@keyframes Color {
+    50% {
+        color: #4d4b4b;
+    }
+}

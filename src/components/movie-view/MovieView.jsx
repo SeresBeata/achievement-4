@@ -26,44 +26,88 @@ export const MovieView = ({ movies }) => {
                     alt="Poster of the movie."
                 />
             </div>
-            <div>
+            <div
+                style={{
+                    textAlign: 'center',
+                    paddingTop: '20px',
+                    paddingBottom: '20px',
+                }}
+            >
                 <h3>
-                    <span>Title: </span>
+                    {/* <span>Title: </span> */}
                     <span>{movie.title}</span>
                 </h3>
             </div>
             <div>
                 <p>
-                    <span>Genre: </span>
+                    <span
+                        style={{
+                            color: 'white',
+                            fontWeight: 'bold',
+                            paddingRight: '10px',
+                        }}
+                    >
+                        Genre:{' '}
+                    </span>
                     <span>{movie.genre.genreName}</span>
                 </p>
             </div>
             <div>
                 <p>
-                    <span>Release Date: </span>
+                    <span
+                        style={{
+                            color: 'white',
+                            fontWeight: 'bold',
+                            paddingRight: '10px',
+                        }}
+                    >
+                        Release Date:{' '}
+                    </span>
                     {/* To convert an ISO date to the date format yyyy-mm-dd. */}
                     <span>{movie.releaseDate.split('T')[0]}</span>
                 </p>
             </div>
             <div>
                 <p>
-                    <span>Director: </span>
+                    <span
+                        style={{
+                            color: 'white',
+                            fontWeight: 'bold',
+                            paddingRight: '10px',
+                        }}
+                    >
+                        Director:{' '}
+                    </span>
                     <span>{movie.director.directorName}</span>
                 </p>
             </div>
             <div>
-                <p>Description:</p>
+                <p
+                    style={{
+                        color: 'white',
+                        fontWeight: 'bold',
+                        paddingRight: '10px',
+                    }}
+                >
+                    Description:
+                </p>
                 <p>{movie.description}</p>
             </div>
             <div>
                 {/* to convert "featured" boolean to string*/}
-                <span>Featured: </span>
-                <span>{movie.featured.toString()}</span>
+                {/* <span>Featured: </span>
+                <span>{movie.featured.toString()}</span> */}
             </div>
-            <div>
+            <div
+                style={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    paddingTop: '20px',
+                }}
+            >
                 {/* Redirect the user back to the main view with <Link>. */}
                 <Link to={`/`}>
-                    <Button className="back-button">Back</Button>
+                    <Button style={{ fontWeight: 'bolder' }}>BACK</Button>
                 </Link>
             </div>
         </div>

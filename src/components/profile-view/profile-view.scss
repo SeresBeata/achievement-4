@@ -1,3 +1,12 @@
+/*Style the card component: Start*/
+.card {
+    text-align: center;
+    margin: 30px 20px 0 20px;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 10px 0 20px 0;
+}
+/*End: Style the card component*/
+
 /*Style the border of the card: Start*/
 .card-border {
     border: 3px solid #ff1a1a;
@@ -26,16 +35,29 @@
     }
 }
 
-.div-heading {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 10px;
+.listgroup-heading {
+    font-weight: bolder;
+    background: rgba(0, 0, 0, 0.6);
+    border: none;
 }
 /*End: style the h3 of form*/
 
-/*Style the div of btn of form: Start*/
-.div-button {
-    display: flex;
-    justify-content: center;
+.listgroup-item {
+    background: rgba(0, 0, 0, 0.6);
+    border: none;
+    padding-bottom: 15px;
 }
-/*End: style the div of btn of form*/
+
+.listgroup-item--info {
+    color: #959090;
+    font-weight: bolder;
+    padding-right: 10px;
+}
+
+/*Style the btn of card: Start*/
+.card-button {
+    font-weight: bolder;
+    margin-top: 20px;
+    text-transform: uppercase;
+}
+/*End: style the btn of card*/

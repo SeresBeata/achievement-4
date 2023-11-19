@@ -16,6 +16,8 @@ import { ProfileView } from '../profile-view/ProfileView';
 import { FavMovieView } from '../favMovie-view/FavMovieView';
 //import UpdateProfileView child component
 import { UpdateProfileView } from '../updateProfile-view/UpdateProfileView';
+//import DeleteProfileView child component
+import { DeleteProfileView } from '../deleteProfile-view/DeleteProfileView';
 //import scss
 import './main-view.scss';
 
@@ -247,6 +249,28 @@ export const MainView = () => {
                                         <UpdateProfileView
                                             user={user}
                                             token={token}
+                                        />
+                                    </Col>
+                                )}
+                            </>
+                        }
+                    />
+                    {/* Create route to delete-profile */}
+                    <Route
+                        path="users/delete/:userId"
+                        element={
+                            <>
+                                {/* Use ternary operator: if user is "falsy" then navigate to "/login". */}
+                                {!user ? (
+                                    //Use replace options property, to redirect to "/login".
+                                    <Navigate to="/login" replace />
+                                ) : (
+                                    //return the DeleteProfileView child component
+                                    <Col>
+                                        <DeleteProfileView
+                                            user={user}
+                                            token={token}
+                                            setUser={setUser}
                                         />
                                     </Col>
                                 )}

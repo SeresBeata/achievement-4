@@ -106,6 +106,7 @@ export const SignupView = () => {
                     type="date"
                     value={birthday}
                     onChange={(e) => setBirthday(e.target.value)}
+                    required
                 />
                 <Form.Text>Entering your birthday is optional.</Form.Text>
             </Form.Group>

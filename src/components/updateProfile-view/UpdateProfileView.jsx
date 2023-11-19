@@ -6,7 +6,7 @@ import { Row, Col, Form, Button } from 'react-bootstrap';
 import './updateProfile-view.scss';
 
 //Create UpdateProfileView child component and export it
-export const UpdateProfileView = ({ user, token, setUser }) => {
+export const UpdateProfileView = ({ user, token }) => {
     //Create state variables, where the initial states are ''
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');

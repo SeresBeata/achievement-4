@@ -247,7 +247,6 @@ export const MainView = () => {
                                         <UpdateProfileView
                                             user={user}
                                             token={token}
-                                            setUser={setUser}
                                         />
                                     </Col>
                                 )}

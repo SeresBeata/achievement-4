@@ -145,7 +145,7 @@ export const MainView = () => {
                                 ) : (
                                     //return the MovieView child component
                                     <Col
-                                        lg={6}
+                                        lg={4}
                                         md={8}
                                         sm={12}
                                         xs={12}

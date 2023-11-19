@@ -16,7 +16,7 @@ export const ProfileView = ({ user }) => {
                 xs={12}
                 className="justify-content-md-center justify-content-sm-center"
             >
-                <Card className="card card-border">
+                <Card className="card-profile card-border">
                     <ListGroup>
                         <ListGroup.Item className="card-border listgroup-heading">
                             <h3 className="card-heading">YOUR PROFILE</h3>

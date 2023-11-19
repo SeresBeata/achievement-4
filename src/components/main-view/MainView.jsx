@@ -14,6 +14,8 @@ import { NavigationBar } from '../navigation-bar/NavigationBar';
 import { ProfileView } from '../profile-view/ProfileView';
 //import FavMovieView child component
 import { FavMovieView } from '../favMovie-view/FavMovieView';
+//import UpdateProfileView child component
+import { UpdateProfileView } from '../updateProfile-view/UpdateProfileView';
 //import scss
 import './main-view.scss';
 
@@ -225,6 +227,24 @@ export const MainView = () => {
                                             token={token}
                                             setUser={setUser}
                                         />
+                                    </Col>
+                                )}
+                            </>
+                        }
+                    />
+                    {/* Create route to update-profile */}
+                    <Route
+                        path="users/update/:userId"
+                        element={
+                            <>
+                                {/* Use ternary operator: if user is "falsy" then navigate to "/login". */}
+                                {!user ? (
+                                    //Use replace options property, to redirect to "/login".
+                                    <Navigate to="/login" replace />
+                                ) : (
+                                    //return the UpdateProfileView child component
+                                    <Col>
+                                        <UpdateProfileView />
                                     </Col>
                                 )}
                             </>

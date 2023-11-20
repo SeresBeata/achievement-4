@@ -72,7 +72,7 @@ export const LoginView = ({ onLoggedIn }) => {
                     placeholder="Your Username"
                 />
             </Form.Group>
-            <Form.Group controlId="formPassword">
+            <Form.Group controlId="formPassword" style={{ marginTop: '10px' }}>
                 <Form.Label>Password:</Form.Label>
                 <Form.Control
                     type="password"

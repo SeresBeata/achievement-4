@@ -1,6 +1,8 @@
 import { useState } from 'react';
 //Import components from React Bootstrap
 import { Form, Button } from 'react-bootstrap';
+//import scss
+import './signup-view.scss';
 
 //Create SignupView child component
 //Export the created child component SignupView, and return register form
@@ -30,17 +32,29 @@ export const SignupView = () => {
             },
         }).then((response) => {
             if (response.ok) {
-                alert('Signup successful');
-                window.location.reload();
+                alert('Signup successful!');
+                //window.location.reload();
+                window.location.assign('http://localhost:1234/login');
             } else {
-                alert('Signup failed');
+                alert('Signup failed!');
             }
         });
     };
 
     //Return register form
     return (
-        <Form onSubmit={handleSubmit}>
+        <Form
+            onSubmit={handleSubmit}
+            style={{
+                background: 'rgba(0, 0, 0, 0.6)',
+                borderRadius: '5px',
+                padding: '20px',
+            }}
+            className="form-border"
+        >
+            <div className="div-heading">
+                <h3 className="form-heading">SIGNUP</h3>
+            </div>
             <Form.Group controlId="formUsername">
                 <Form.Label>Username:</Form.Label>
                 <Form.Control
@@ -93,13 +107,25 @@ export const SignupView = () => {
                     type="date"
                     value={birthday}
                     onChange={(e) => setBirthday(e.target.value)}
+                    required
                 />
-                <Form.Text>Entering your birthday is optional.</Form.Text>
+                <Form.Text>
+                    We'll never share your birthday with anyone else.
+                </Form.Text>
             </Form.Group>
-
-            <Button variant="primary" type="submit">
-                Submit
-            </Button>
+            <div className="div-button">
+                <Button
+                    variant="primary"
+                    type="submit"
+                    style={{
+                        fontWeight: 'bolder',
+                        marginTop: '20px',
+                        textTransform: 'uppercase',
+                    }}
+                >
+                    Submit
+                </Button>
+            </div>
         </Form>
     );
 };

@@ -5,18 +5,33 @@ import { MovieView } from '../movie-view/MovieView';
 import { LoginView } from '../login-view/LoginView';
 import { SignupView } from '../signup-view/SignupView';
 //Import components from React Bootstrap
-import {
-    Row,
-    Col,
-    Button,
-    Nav,
-    Navbar,
-    NavDropdown,
-    Container,
-} from 'react-bootstrap';
+import { Row, Col, Button } from 'react-bootstrap';
+//import from react-router-dom
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+//import navbar child component
+import { NavigationBar } from '../navigation-bar/NavigationBar';
+//import ProfileView child component
+import { ProfileView } from '../profile-view/ProfileView';
+//import FavMovieView child component
+import { FavMovieView } from '../favMovie-view/FavMovieView';
+//import UpdateProfileView child component
+import { UpdateProfileView } from '../updateProfile-view/UpdateProfileView';
+//import DeleteProfileView child component
+import { DeleteProfileView } from '../deleteProfile-view/DeleteProfileView';
+//import scss
+import './main-view.scss';
 
 //Export the created MainView component
 export const MainView = () => {
+    //adds backdrop for login view and gets rid of it once user logs in
+    useEffect(() => {
+        if (!user) {
+            document.body.classList.add('login-backdrop');
+        } else {
+            document.body.classList.remove('login-backdrop');
+        }
+    });
+
     const storedUser = JSON.parse(localStorage.getItem('user')); //Use getItem() to retrieve "user" from localStorage
     const storedToken = localStorage.getItem('token'); //Use getItem() to retrieve "token" from localStorage
     //Create state variable, called user with initial stale "null". Use to check if user is logged in or not.
@@ -63,111 +78,207 @@ export const MainView = () => {
             });
     }, [token]);
 
-    //Use ternary operator depending on what to return:
+    //Use state-based router & ternary operator depending on what to return:
     return (
-        <Row className="justify-content-md-center justify-content-sm-center">
-            {/*Use ternary operator: if no user is logged in, then return the LoginView and SignupView child component. 
-            With it the user have to login in before being able to see the movies of MyFlix. */}
-            {!user ? (
-                <Col lg={4} md={6} sm={12} xs={12}>
-                    <h3>Login:</h3>
-                    <LoginView
-                        onLoggedIn={(user, token) => {
-                            setUser(user);
-                            setToken(token);
-                        }}
+        <BrowserRouter>
+            {/* Create Navbar */}
+            <NavigationBar //Nullify the token when the logout button is clicked. And clear the localStorage too.
+                user={user}
+                onLoggedOut={() => {
+                    setUser(null);
+                    setToken(null);
+                    localStorage.clear();
+                }}
+            />
+            <Row className="justify-content-md-center justify-content-sm-center">
+                <Routes>
+                    {/* Use the <Route> components of react-router-dom for state-based router.  */}
+                    {/* Create 4 routes for signup, login, selected-movie and all-movies  */}
+                    <Route
+                        path="/signup"
+                        element={
+                            <>
+                                {/* Use ternary operator: if user is "truthy" then navigate to "/", if user is "falsy", then return the SignupView child component. */}
+                                {user ? (
+                                    <Navigate to="/" />
+                                ) : (
+                                    <Col lg={4} md={6} sm={12} xs={12}>
+                                        {/* <h3>Signup:</h3> */}
+                                        <SignupView />
+                                    </Col>
+                                )}
+                            </>
+                        }
                     />
-                    or
-                    <h3>Signup:</h3>
-                    <SignupView />
-                </Col>
-            ) : selectedMovie ? (
-                //Use ternary operator: if selectedMovie is true, then return the MovieView child component
-                <Col lg={6} md={8} sm={12} xs={12} className="movie-view--bg">
-                    <MovieView
-                        movie={selectedMovie}
-                        //Pass a function from the MainView component to MovieView as a prop called onBackClick that executes setSelectedMovies(), setting the value of selectedMovie to the initial state value, null.
-                        onBackClick={() => setSelectedMovie(null)}
+                    <Route
+                        path="/login"
+                        element={
+                            <>
+                                {/* Use ternary operator: if user is "truthy" then navigate to "/", if user is "falsy", then return the LoginView child component. */}
+                                {user ? (
+                                    <Navigate to="/" />
+                                ) : (
+                                    <Col lg={4} md={6} sm={12} xs={12}>
+                                        {/* <h3>Login:</h3> */}
+                                        <LoginView
+                                            onLoggedIn={(user, token) => {
+                                                setUser(user);
+                                                setToken(token);
+                                            }}
+                                        />
+                                    </Col>
+                                )}
+                            </>
+                        }
                     />
-                </Col>
-            ) : movies.length === 0 ? (
-                // Use ternary operator: if movies array is empty, return message "The list is empty!"
-                <div>The list is empty!</div>
-            ) : (
-                //Return the heading with the titles of movies
-                <>
-                    <Navbar expand="lg" className="navbar-bg">
-                        <Container>
-                            <Navbar.Brand
-                                href="#home"
-                                style={{ color: '#fbd6da' }}
-                            >
-                                myFlix
-                            </Navbar.Brand>
-                            <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                            <Navbar.Collapse id="basic-navbar-nav">
-                                <Nav className="me-auto">
-                                    <Nav.Link href="#home">Home</Nav.Link>
-                                    <Nav.Link href="#link">Link</Nav.Link>
-                                    <NavDropdown
-                                        title="Dropdown"
-                                        id="basic-nav-dropdown"
+                    <Route
+                        path="/movies/:movieId"
+                        element={
+                            <>
+                                {/* Use ternary operator: if user is "falsy" then navigate to "/login". */}
+                                {!user ? (
+                                    //Use replace options property, to redirect to "/login".
+                                    <Navigate to="/login" replace />
+                                ) : movies.length === 0 ? (
+                                    //if movies array is empty, return message "The list is empty!
+                                    <Col>The list is empty!</Col>
+                                ) : (
+                                    //return the MovieView child component
+                                    <Col
+                                        lg={4}
+                                        md={8}
+                                        sm={12}
+                                        xs={12}
+                                        className="movie-view--bg"
                                     >
-                                        <NavDropdown.Item href="#action/3.1">
-                                            Action
-                                        </NavDropdown.Item>
-                                        <NavDropdown.Item href="#action/3.2">
-                                            Another action
-                                        </NavDropdown.Item>
-                                        <NavDropdown.Item href="#action/3.3">
-                                            Something
-                                        </NavDropdown.Item>
-                                        <NavDropdown.Divider />
-                                        <NavDropdown.Item href="#action/3.4">
-                                            Separated link
-                                        </NavDropdown.Item>
-                                    </NavDropdown>
-                                </Nav>
-                            </Navbar.Collapse>
-                        </Container>
-                    </Navbar>
-
-                    <div style={{ textAlign: 'center', margin: '15px' }}>
-                        <h1>Movies</h1>
-                    </div>
-
-                    {/* Use the map() method to iterate through movies array items*/}
-                    {movies.map((movie) => (
-                        //Pass data from parent component (MainView) to a child component (MovieCard) by using prop, called "movie".
-                        //Pass a function from the MainView component to MoveCard as a prop called onMovieClick that executes setSelectedMovies().
-                        <Col
-                            key={movie._id}
-                            className="mb-4"
-                            lg={3}
-                            md={4}
-                            sm={6}
-                            xs={12}
-                        >
-                            <MovieCard
-                                movie={movie}
-                                onMovieClick={(newSelectedMovie) => {
-                                    setSelectedMovie(newSelectedMovie);
-                                }}
-                            />
-                        </Col>
-                    ))}
-
-                    <Button //Create btn for logout: nullify the token when the logout button is clicked. And clear the localStorage too.
-                        onClick={() => {
-                            setUser(null);
-                            setToken(null);
-                            localStorage.clear();
-                        }}
-                    >
-                        Logout
-                    </Button>
-                </>
-            )}
-        </Row>
+                                        <MovieView movies={movies} />
+                                    </Col>
+                                )}
+                            </>
+                        }
+                    />
+                    <Route
+                        path="/"
+                        element={
+                            <>
+                                {/* Use ternary operator: if user is "falsy" then navigate to "/login". */}
+                                {!user ? (
+                                    //Use replace options property, to redirect to "/login".
+                                    <Navigate to="/login" replace />
+                                ) : movies.length === 0 ? (
+                                    //if movies array is empty, return message "The list is empty!
+                                    <Col>The list is empty!</Col>
+                                ) : (
+                                    <>
+                                        {/* Use the map() method to iterate through movies array items*/}
+                                        {movies.map((movie) => (
+                                            //return the MovieCard child component
+                                            <Col
+                                                key={movie._id}
+                                                className="mb-4"
+                                                lg={3}
+                                                md={4}
+                                                sm={6}
+                                                xs={12}
+                                            >
+                                                <MovieCard
+                                                    user={user}
+                                                    movie={movie}
+                                                    token={token}
+                                                    setUser={setUser}
+                                                />
+                                            </Col>
+                                        ))}
+                                    </>
+                                )}
+                            </>
+                        }
+                    />
+                    {/* Create further routes for profile, favMovie, update-profile and del-account: */}
+                    <Route
+                        path="users/:userId"
+                        element={
+                            <>
+                                {/* Use ternary operator: if user is "falsy" then navigate to "/login". */}
+                                {!user ? (
+                                    //Use replace options property, to redirect to "/login".
+                                    <Navigate to="/login" replace />
+                                ) : (
+                                    //return the ProfileView child component
+                                    <Col>
+                                        <ProfileView user={user} />
+                                    </Col>
+                                )}
+                            </>
+                        }
+                    />
+                    <Route
+                        path="users/favMovies/:userId"
+                        element={
+                            <>
+                                {/* Use ternary operator: if user is "falsy" then navigate to "/login". */}
+                                {!user ? (
+                                    //Use replace options property, to redirect to "/login".
+                                    <Navigate to="/login" replace />
+                                ) : (
+                                    //return the favMovieView child component
+                                    <Col>
+                                        <FavMovieView
+                                            user={user}
+                                            movies={movies}
+                                            token={token}
+                                            setUser={setUser}
+                                        />
+                                    </Col>
+                                )}
+                            </>
+                        }
+                    />
+                    {/* Create route to update-profile */}
+                    <Route
+                        path="users/update/:userId"
+                        element={
+                            <>
+                                {/* Use ternary operator: if user is "falsy" then navigate to "/login". */}
+                                {!user ? (
+                                    //Use replace options property, to redirect to "/login".
+                                    <Navigate to="/login" replace />
+                                ) : (
+                                    //return the UpdateProfileView child component
+                                    <Col>
+                                        <UpdateProfileView
+                                            user={user}
+                                            token={token}
+                                        />
+                                    </Col>
+                                )}
+                            </>
+                        }
+                    />
+                    {/* Create route to delete-profile */}
+                    <Route
+                        path="users/delete/:userId"
+                        element={
+                            <>
+                                {/* Use ternary operator: if user is "falsy" then navigate to "/login". */}
+                                {!user ? (
+                                    //Use replace options property, to redirect to "/login".
+                                    <Navigate to="/login" replace />
+                                ) : (
+                                    //return the DeleteProfileView child component
+                                    <Col>
+                                        <DeleteProfileView
+                                            user={user}
+                                            token={token}
+                                            setUser={setUser}
+                                        />
+                                    </Col>
+                                )}
+                            </>
+                        }
+                    />
+                </Routes>
+            </Row>
+        </BrowserRouter>
     );
 };

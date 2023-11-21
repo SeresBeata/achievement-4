@@ -1,0 +1,13 @@
+.moviecard--open-btn {
+    color: black;
+    background-color: red;
+    padding: 5px;
+    border-radius: 5px;
+    text-transform: uppercase;
+    font-weight: bolder;
+    text-decoration: none;
+}
+
+.moviecard--open-btn:hover {
+    background-color: red($color: #000000);
+}

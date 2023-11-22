@@ -46,6 +46,9 @@ export const NavigationBar = ({ user, onLoggedOut }) => {
                                 <Nav.Link onClick={onLoggedOut}>
                                     Logout
                                 </Nav.Link>
+                                <Nav.Link as={Link} to="/trailer">
+                                    Trailer
+                                </Nav.Link>
                                 <NavDropdown
                                     title="Profile"
                                     id="basic-nav-dropdown"

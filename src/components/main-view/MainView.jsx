@@ -5,7 +5,7 @@ import { MovieView } from '../movie-view/MovieView';
 import { LoginView } from '../login-view/LoginView';
 import { SignupView } from '../signup-view/SignupView';
 //Import components from React Bootstrap
-import { Row, Col, Button } from 'react-bootstrap';
+import { Row, Col, Button, Card, ListGroup } from 'react-bootstrap';
 //import from react-router-dom
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 //import navbar child component
@@ -42,6 +42,29 @@ export const MainView = () => {
     const [movies, setMovies] = useState([]);
     //Create state variable, called selectedMovie, where the initial value of selectedMovie state is null.
     const [selectedMovie, setSelectedMovie] = useState(null);
+
+    //filter movies by genre
+    //drama
+    const dramaSearch = movies.filter(
+        (movie) => movie.genre.genreName === 'Period Drama'
+    );
+    const dramaGenreSearch = movies.filter(
+        (movie) => movie._id === '652be2cf7a989d00e1a05b67'
+    );
+    //sci-fi
+    const scifiSearch = movies.filter(
+        (movie) => movie.genre.genreName === 'Science Fiction'
+    );
+    const scifiGenreSearch = movies.filter(
+        (movie) => movie._id === '652be67f13a27678f514b9b8'
+    );
+    //hero
+    const heroSearch = movies.filter(
+        (movie) => movie.genre.genreName === 'Superhero Film'
+    );
+    const heroGenreSearch = movies.filter(
+        (movie) => movie._id === '652beb2b712c744fccad1afd'
+    );
 
     //Fetch data from API and populate movies state using setMovies, with the fetched movies array from myFlix API
     useEffect(() => {
@@ -273,6 +296,220 @@ export const MainView = () => {
                                             setUser={setUser}
                                         />
                                     </Col>
+                                )}
+                            </>
+                        }
+                    />
+                    {/* Create route for filtered movies by genre */}
+                    <Route
+                        path="movies/moviesbygenres/period-drama"
+                        element={
+                            <>
+                                {/* Use ternary operator: if user is "falsy" then navigate to "/login". */}
+                                {!user ? (
+                                    //Use replace options property, to redirect to "/login".
+                                    <Navigate to="/login" replace />
+                                ) : (
+                                    //return period drama movies
+
+                                    <>
+                                        {dramaGenreSearch.map((movie) => (
+                                            <div
+                                                key={movie._id}
+                                                style={{
+                                                    textAlign: 'center',
+                                                    display: 'flex',
+                                                    justifyContent: 'center',
+                                                }}
+                                            >
+                                                <Card
+                                                    style={{
+                                                        marginBottom: '20px ',
+                                                    }}
+                                                >
+                                                    <ListGroup variant="flush">
+                                                        <ListGroup.Item>
+                                                            <h2>
+                                                                {
+                                                                    movie.genre
+                                                                        .genreName
+                                                                }
+                                                            </h2>
+                                                        </ListGroup.Item>
+                                                        <ListGroup.Item>
+                                                            <div>
+                                                                {
+                                                                    movie.genre
+                                                                        .genreDescription
+                                                                }
+                                                            </div>
+                                                        </ListGroup.Item>
+                                                    </ListGroup>
+                                                </Card>
+                                            </div>
+                                        ))}
+
+                                        {dramaSearch.map((movie) => (
+                                            //return the MovieCard child component
+                                            <Col
+                                                key={movie._id}
+                                                className="mb-4"
+                                                lg={3}
+                                                md={4}
+                                                sm={6}
+                                                xs={12}
+                                            >
+                                                <MovieCard
+                                                    user={user}
+                                                    movie={movie}
+                                                    token={token}
+                                                    setUser={setUser}
+                                                />
+                                            </Col>
+                                        ))}
+                                    </>
+                                )}
+                            </>
+                        }
+                    />
+                    <Route
+                        path="movies/moviesbygenres/sci-fi"
+                        element={
+                            <>
+                                {/* Use ternary operator: if user is "falsy" then navigate to "/login". */}
+                                {!user ? (
+                                    //Use replace options property, to redirect to "/login".
+                                    <Navigate to="/login" replace />
+                                ) : (
+                                    //return period drama movies
+
+                                    <>
+                                        {scifiGenreSearch.map((movie) => (
+                                            <div
+                                                key={movie._id}
+                                                style={{
+                                                    textAlign: 'center',
+                                                    display: 'flex',
+                                                    justifyContent: 'center',
+                                                }}
+                                            >
+                                                <Card
+                                                    style={{
+                                                        marginBottom: '20px ',
+                                                    }}
+                                                >
+                                                    <ListGroup variant="flush">
+                                                        <ListGroup.Item>
+                                                            <h2>
+                                                                {
+                                                                    movie.genre
+                                                                        .genreName
+                                                                }
+                                                            </h2>
+                                                        </ListGroup.Item>
+                                                        <ListGroup.Item>
+                                                            <div>
+                                                                {
+                                                                    movie.genre
+                                                                        .genreDescription
+                                                                }
+                                                            </div>
+                                                        </ListGroup.Item>
+                                                    </ListGroup>
+                                                </Card>
+                                            </div>
+                                        ))}
+
+                                        {scifiSearch.map((movie) => (
+                                            //return the MovieCard child component
+                                            <Col
+                                                key={movie._id}
+                                                className="mb-4"
+                                                lg={3}
+                                                md={4}
+                                                sm={6}
+                                                xs={12}
+                                            >
+                                                <MovieCard
+                                                    user={user}
+                                                    movie={movie}
+                                                    token={token}
+                                                    setUser={setUser}
+                                                />
+                                            </Col>
+                                        ))}
+                                    </>
+                                )}
+                            </>
+                        }
+                    />
+                    <Route
+                        path="movies/moviesbygenres/hero"
+                        element={
+                            <>
+                                {/* Use ternary operator: if user is "falsy" then navigate to "/login". */}
+                                {!user ? (
+                                    //Use replace options property, to redirect to "/login".
+                                    <Navigate to="/login" replace />
+                                ) : (
+                                    //return period drama movies
+
+                                    <>
+                                        {heroGenreSearch.map((movie) => (
+                                            <div
+                                                key={movie._id}
+                                                style={{
+                                                    textAlign: 'center',
+                                                    display: 'flex',
+                                                    justifyContent: 'center',
+                                                }}
+                                            >
+                                                <Card
+                                                    style={{
+                                                        marginBottom: '20px ',
+                                                    }}
+                                                >
+                                                    <ListGroup variant="flush">
+                                                        <ListGroup.Item>
+                                                            <h2>
+                                                                {
+                                                                    movie.genre
+                                                                        .genreName
+                                                                }
+                                                            </h2>
+                                                        </ListGroup.Item>
+                                                        <ListGroup.Item>
+                                                            <div>
+                                                                {
+                                                                    movie.genre
+                                                                        .genreDescription
+                                                                }
+                                                            </div>
+                                                        </ListGroup.Item>
+                                                    </ListGroup>
+                                                </Card>
+                                            </div>
+                                        ))}
+
+                                        {heroSearch.map((movie) => (
+                                            //return the MovieCard child component
+                                            <Col
+                                                key={movie._id}
+                                                className="mb-4"
+                                                lg={3}
+                                                md={4}
+                                                sm={6}
+                                                xs={12}
+                                            >
+                                                <MovieCard
+                                                    user={user}
+                                                    movie={movie}
+                                                    token={token}
+                                                    setUser={setUser}
+                                                />
+                                            </Col>
+                                        ))}
+                                    </>
                                 )}
                             </>
                         }

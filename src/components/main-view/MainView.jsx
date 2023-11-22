@@ -18,6 +18,8 @@ import { FavMovieView } from '../favMovie-view/FavMovieView';
 import { UpdateProfileView } from '../updateProfile-view/UpdateProfileView';
 //import DeleteProfileView child component
 import { DeleteProfileView } from '../deleteProfile-view/DeleteProfileView';
+//import from react-youtube
+import YouTube from 'react-youtube';
 //import scss
 import './main-view.scss';
 
@@ -510,6 +512,74 @@ export const MainView = () => {
                                             </Col>
                                         ))}
                                     </>
+                                )}
+                            </>
+                        }
+                    />
+                    {/* Create route to trailer */}
+                    <Route
+                        path="/trailer"
+                        element={
+                            <>
+                                {/* Use ternary operator: if user is "falsy" then navigate to "/login". */}
+                                {!user ? (
+                                    //Use replace options property, to redirect to "/login".
+                                    <Navigate to="/login" replace />
+                                ) : (
+                                    //return video as <iframe>
+                                    <Col>
+                                        <div
+                                            style={{
+                                                display: 'flex',
+                                                justifyContent: 'center',
+                                                margin: '20px 0 30px 0',
+                                            }}
+                                        >
+                                            <h1> 📽️ Upcoming releases 🎬</h1>
+                                        </div>
+
+                                        <div
+                                            style={{
+                                                display: 'flex',
+                                                justifyContent: 'center',
+                                            }}
+                                        >
+                                            <iframe
+                                                width="560"
+                                                height="315"
+                                                src="https://www.youtube.com/embed/ewc7TV4Ucbg?si=nGuWk7fjbgigQfa6"
+                                                title="YouTube video player"
+                                                frameBorder="0"
+                                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                                allowFullScreen
+                                            ></iframe>
+                                        </div>
+                                        <div
+                                            style={{
+                                                display: 'flex',
+                                                justifyContent: 'center',
+                                                margin: '20px 0 30px 0',
+                                            }}
+                                        >
+                                            <div>
+                                                <span
+                                                    style={{
+                                                        fontSize: '50px',
+                                                    }}
+                                                >
+                                                    🍿
+                                                </span>
+                                                Don't miss out on the best!{' '}
+                                                <span
+                                                    style={{
+                                                        fontSize: '50px',
+                                                    }}
+                                                >
+                                                    🥤
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </Col>
                                 )}
                             </>
                         }

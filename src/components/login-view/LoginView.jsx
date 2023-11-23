@@ -51,8 +51,8 @@ export const LoginView = ({ onLoggedIn }) => {
 
     //Login as guest
     //Guest sign in info
-    const userName = 'Laura';
-    const passWord = 'laura123';
+    const userName = 'Guest';
+    const passWord = 'guest123';
 
     const guestHandleSubmit = (event) => {
         // Use preventDefault() to prevent default behavior of the form (reloading the entire page)

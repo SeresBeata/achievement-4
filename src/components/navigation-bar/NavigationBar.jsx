@@ -110,6 +110,12 @@ export const NavigationBar = ({ user, onLoggedOut }) => {
                                     >
                                         Superhero Film
                                     </NavDropdown.Item>
+                                    <NavDropdown.Item
+                                        as={Link}
+                                        to={`movies/moviesbygenres/fantasy`}
+                                    >
+                                        Fantasy
+                                    </NavDropdown.Item>
                                 </NavDropdown>
                             </>
                         )}

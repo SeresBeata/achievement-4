@@ -44,6 +44,10 @@ export const MainView = () => {
     const [movies, setMovies] = useState([]);
     //Create state variable, called selectedMovie, where the initial value of selectedMovie state is null.
     const [selectedMovie, setSelectedMovie] = useState(null);
+    //Create variable that holds initial number of movies to be shown and for the number of additional movies to show each time the user clicks the load more button.
+    const imagePerRow = 4;
+    //Create state variable, called "next", which stores the initial number of movies to be shown and update the state on load more button click.
+    const [next, setNext] = useState(imagePerRow);
 
     //filter movies by genre
     //drama
@@ -110,6 +114,11 @@ export const MainView = () => {
             });
     }, [token]);
 
+    //Create the handleMoreImage function that will run each time the load more button is clicked.
+    const handleMoreImage = () => {
+        setNext(next + imagePerRow);
+    };
+
     //Use state-based router & ternary operator depending on what to return:
     return (
         <BrowserRouter>
@@ -121,6 +130,7 @@ export const MainView = () => {
                     setToken(null);
                     localStorage.clear();
                 }}
+                id="top"
             />
             <Row className="justify-content-md-center justify-content-sm-center">
                 <Routes>
@@ -203,7 +213,7 @@ export const MainView = () => {
                                 ) : (
                                     <>
                                         {/* Use the map() method to iterate through movies array items*/}
-                                        {movies.map((movie) => (
+                                        {movies.slice(0, next).map((movie) => (
                                             //return the MovieCard child component
                                             <Col
                                                 key={movie._id}
@@ -221,6 +231,53 @@ export const MainView = () => {
                                                 />
                                             </Col>
                                         ))}
+                                        {/* Create a load more button and give it a onClick handler called handleMoreImage . */}
+                                        {next < movies.length && (
+                                            <Button
+                                                onClick={handleMoreImage}
+                                                style={{
+                                                    width: '150px',
+                                                    color: '#635f5f',
+                                                    border: 'solid 1px #635f5f',
+                                                    background:
+                                                        'rgba(0, 0, 0, 0.6)',
+                                                    fontWeight: 'bolder',
+                                                    textTransform: 'uppercase',
+                                                    margin: '10px 0 20px 0',
+                                                }}
+                                                className="main-btn--load"
+                                            >
+                                                Load more
+                                            </Button>
+                                        )}
+                                        {/* Create go-to-top btn by using href of <a>. Use id of <NavigationBar> at href. */}
+                                        {next === movies.length && (
+                                            <Button
+                                                style={{
+                                                    width: '150px',
+                                                    color: '#635f5f',
+                                                    border: 'solid 1px #635f5f',
+                                                    background:
+                                                        'rgba(0, 0, 0, 0.6)',
+                                                    fontWeight: 'bolder',
+                                                    textTransform: 'uppercase',
+                                                    margin: '10px 0 20px 0',
+                                                }}
+                                            >
+                                                <a
+                                                    href="#top"
+                                                    style={{
+                                                        color: '#635f5f',
+                                                        fontWeight: 'bolder',
+                                                        textTransform:
+                                                            'uppercase',
+                                                        textDecoration: 'none',
+                                                    }}
+                                                >
+                                                    Go to the Top
+                                                </a>
+                                            </Button>
+                                        )}
                                     </>
                                 )}
                             </>

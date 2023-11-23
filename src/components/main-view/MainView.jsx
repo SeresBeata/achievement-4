@@ -67,6 +67,13 @@ export const MainView = () => {
     const heroGenreSearch = movies.filter(
         (movie) => movie._id === '652beb2b712c744fccad1afd'
     );
+    //fantasy
+    const fantasySearch = movies.filter(
+        (movie) => movie.genre.genreName === 'Fantasy'
+    );
+    const fantasyGenreSearch = movies.filter(
+        (movie) => movie._id === '652bec178118f503255d2f57'
+    );
 
     //Fetch data from API and populate movies state using setMovies, with the fetched movies array from myFlix API
     useEffect(() => {
@@ -494,6 +501,78 @@ export const MainView = () => {
                                         ))}
 
                                         {heroSearch.map((movie) => (
+                                            //return the MovieCard child component
+                                            <Col
+                                                key={movie._id}
+                                                className="mb-4"
+                                                lg={3}
+                                                md={4}
+                                                sm={6}
+                                                xs={12}
+                                            >
+                                                <MovieCard
+                                                    user={user}
+                                                    movie={movie}
+                                                    token={token}
+                                                    setUser={setUser}
+                                                />
+                                            </Col>
+                                        ))}
+                                    </>
+                                )}
+                            </>
+                        }
+                    />
+                    {/* Create route for filtered movies by fantasy genre */}
+                    <Route
+                        path="movies/moviesbygenres/fantasy"
+                        element={
+                            <>
+                                {/* Use ternary operator: if user is "falsy" then navigate to "/login". */}
+                                {!user ? (
+                                    //Use replace options property, to redirect to "/login".
+                                    <Navigate to="/login" replace />
+                                ) : (
+                                    //return fantasy movies
+
+                                    <>
+                                        {fantasyGenreSearch.map((movie) => (
+                                            <div
+                                                key={movie._id}
+                                                style={{
+                                                    textAlign: 'center',
+                                                    display: 'flex',
+                                                    justifyContent: 'center',
+                                                }}
+                                            >
+                                                <Card
+                                                    style={{
+                                                        marginBottom: '20px ',
+                                                    }}
+                                                >
+                                                    <ListGroup variant="flush">
+                                                        <ListGroup.Item>
+                                                            <h2>
+                                                                {
+                                                                    movie.genre
+                                                                        .genreName
+                                                                }
+                                                            </h2>
+                                                        </ListGroup.Item>
+                                                        <ListGroup.Item>
+                                                            <div>
+                                                                {
+                                                                    movie.genre
+                                                                        .genreDescription
+                                                                }
+                                                            </div>
+                                                        </ListGroup.Item>
+                                                    </ListGroup>
+                                                </Card>
+                                            </div>
+                                        ))}
+
+                                        {fantasySearch.map((movie) => (
                                             //return the MovieCard child component
                                             <Col
                                                 key={movie._id}

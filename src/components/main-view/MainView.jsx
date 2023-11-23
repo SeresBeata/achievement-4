@@ -208,8 +208,19 @@ export const MainView = () => {
                                     //Use replace options property, to redirect to "/login".
                                     <Navigate to="/login" replace />
                                 ) : movies.length === 0 ? (
-                                    //if movies array is empty, return message "The list is empty!
-                                    <Col>The list is empty!</Col>
+                                    //if movies array is empty, return hourglass
+                                    <Col>
+                                        <div
+                                            style={{
+                                                display: 'flex',
+                                                justifyContent: 'center',
+                                                margin: '30px 0 0 0',
+                                                fontSize: '50px',
+                                            }}
+                                        >
+                                            ⏳
+                                        </div>
+                                    </Col>
                                 ) : (
                                     <>
                                         {/* Use the map() method to iterate through movies array items*/}

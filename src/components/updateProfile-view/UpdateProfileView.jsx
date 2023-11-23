@@ -18,7 +18,7 @@ export const UpdateProfileView = ({ user, token }) => {
         event.preventDefault();
 
         const data = {
-            name: username,
+            username: username,
             password: password,
             email: email,
             birthday: birthday,

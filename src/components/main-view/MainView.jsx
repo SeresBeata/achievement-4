@@ -233,50 +233,68 @@ export const MainView = () => {
                                         ))}
                                         {/* Create a load more button and give it a onClick handler called handleMoreImage . */}
                                         {next < movies.length && (
-                                            <Button
-                                                onClick={handleMoreImage}
+                                            <div
                                                 style={{
-                                                    width: '150px',
-                                                    color: '#635f5f',
-                                                    border: 'solid 1px #635f5f',
-                                                    background:
-                                                        'rgba(0, 0, 0, 0.6)',
-                                                    fontWeight: 'bolder',
-                                                    textTransform: 'uppercase',
-                                                    margin: '10px 0 20px 0',
-                                                }}
-                                                className="main-btn--load"
-                                            >
-                                                Load more
-                                            </Button>
-                                        )}
-                                        {/* Create go-to-top btn by using href of <a>. Use id of <NavigationBar> at href. */}
-                                        {next === movies.length && (
-                                            <Button
-                                                style={{
-                                                    width: '150px',
-                                                    color: '#635f5f',
-                                                    border: 'solid 1px #635f5f',
-                                                    background:
-                                                        'rgba(0, 0, 0, 0.6)',
-                                                    fontWeight: 'bolder',
-                                                    textTransform: 'uppercase',
-                                                    margin: '10px 0 20px 0',
+                                                    display: 'flex',
+                                                    justifyContent: 'center',
                                                 }}
                                             >
-                                                <a
-                                                    href="#top"
+                                                <Button
+                                                    onClick={handleMoreImage}
                                                     style={{
+                                                        width: '150px',
                                                         color: '#635f5f',
+                                                        border: 'solid 1px #635f5f',
+                                                        background:
+                                                            'rgba(0, 0, 0, 0.6)',
                                                         fontWeight: 'bolder',
                                                         textTransform:
                                                             'uppercase',
-                                                        textDecoration: 'none',
+                                                        margin: '10px 0 20px 0',
+                                                    }}
+                                                    className="main-btn--load"
+                                                >
+                                                    Load more
+                                                </Button>
+                                            </div>
+                                        )}
+                                        {/* Create go-to-top btn by using href of <a>. Use id of <NavigationBar> at href. */}
+                                        {next === movies.length && (
+                                            <div
+                                                style={{
+                                                    display: 'flex',
+                                                    justifyContent: 'center',
+                                                }}
+                                            >
+                                                <Button
+                                                    style={{
+                                                        width: '150px',
+                                                        color: '#635f5f',
+                                                        border: 'solid 1px #635f5f',
+                                                        background:
+                                                            'rgba(0, 0, 0, 0.6)',
+                                                        fontWeight: 'bolder',
+                                                        textTransform:
+                                                            'uppercase',
+                                                        margin: '10px 0 20px 0',
                                                     }}
                                                 >
-                                                    Go to the Top
-                                                </a>
-                                            </Button>
+                                                    <a
+                                                        href="#top"
+                                                        style={{
+                                                            color: '#635f5f',
+                                                            fontWeight:
+                                                                'bolder',
+                                                            textTransform:
+                                                                'uppercase',
+                                                            textDecoration:
+                                                                'none',
+                                                        }}
+                                                    >
+                                                        Go to the Top
+                                                    </a>
+                                                </Button>
+                                            </div>
                                         )}
                                     </>
                                 )}

@@ -5,7 +5,7 @@ import { MovieView } from '../movie-view/MovieView';
 import { LoginView } from '../login-view/LoginView';
 import { SignupView } from '../signup-view/SignupView';
 //Import components from React Bootstrap
-import { Row, Col, Button } from 'react-bootstrap';
+import { Row, Col, Button, Card, ListGroup } from 'react-bootstrap';
 //import from react-router-dom
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 //import navbar child component
@@ -18,6 +18,8 @@ import { FavMovieView } from '../favMovie-view/FavMovieView';
 import { UpdateProfileView } from '../updateProfile-view/UpdateProfileView';
 //import DeleteProfileView child component
 import { DeleteProfileView } from '../deleteProfile-view/DeleteProfileView';
+//import from react-youtube
+import YouTube from 'react-youtube';
 //import scss
 import './main-view.scss';
 
@@ -42,6 +44,40 @@ export const MainView = () => {
     const [movies, setMovies] = useState([]);
     //Create state variable, called selectedMovie, where the initial value of selectedMovie state is null.
     const [selectedMovie, setSelectedMovie] = useState(null);
+    //Create variable that holds initial number of movies to be shown and for the number of additional movies to show each time the user clicks the load more button.
+    const imagePerRow = 4;
+    //Create state variable, called "next", which stores the initial number of movies to be shown and update the state on load more button click.
+    const [next, setNext] = useState(imagePerRow);
+
+    //filter movies by genre
+    //drama
+    const dramaSearch = movies.filter(
+        (movie) => movie.genre.genreName === 'Period Drama'
+    );
+    const dramaGenreSearch = movies.filter(
+        (movie) => movie._id === '652be2cf7a989d00e1a05b67'
+    );
+    //sci-fi
+    const scifiSearch = movies.filter(
+        (movie) => movie.genre.genreName === 'Science Fiction'
+    );
+    const scifiGenreSearch = movies.filter(
+        (movie) => movie._id === '652be67f13a27678f514b9b8'
+    );
+    //hero
+    const heroSearch = movies.filter(
+        (movie) => movie.genre.genreName === 'Superhero Film'
+    );
+    const heroGenreSearch = movies.filter(
+        (movie) => movie._id === '652beb2b712c744fccad1afd'
+    );
+    //fantasy
+    const fantasySearch = movies.filter(
+        (movie) => movie.genre.genreName === 'Fantasy'
+    );
+    const fantasyGenreSearch = movies.filter(
+        (movie) => movie._id === '652bec178118f503255d2f57'
+    );
 
     //Fetch data from API and populate movies state using setMovies, with the fetched movies array from myFlix API
     useEffect(() => {
@@ -78,6 +114,16 @@ export const MainView = () => {
             });
     }, [token]);
 
+    //Create the handleMoreImage function that will run each time the load more button is clicked.
+    const handleMoreImage = () => {
+        setNext(next + imagePerRow);
+    };
+
+    //Create show-less function that reloads the page
+    const handleShowLess = () => {
+        window.location.reload();
+    };
+
     //Use state-based router & ternary operator depending on what to return:
     return (
         <BrowserRouter>
@@ -89,6 +135,7 @@ export const MainView = () => {
                     setToken(null);
                     localStorage.clear();
                 }}
+                id="top"
             />
             <Row className="justify-content-md-center justify-content-sm-center">
                 <Routes>
@@ -166,12 +213,49 @@ export const MainView = () => {
                                     //Use replace options property, to redirect to "/login".
                                     <Navigate to="/login" replace />
                                 ) : movies.length === 0 ? (
-                                    //if movies array is empty, return message "The list is empty!
-                                    <Col>The list is empty!</Col>
+                                    //if movies array is empty, return hourglass
+                                    <Col>
+                                        <div
+                                            style={{
+                                                display: 'flex',
+                                                justifyContent: 'center',
+                                                margin: '30px 0 0 0',
+                                                fontSize: '50px',
+                                            }}
+                                        >
+                                            ⏳
+                                        </div>
+                                    </Col>
                                 ) : (
                                     <>
+                                        {/* Create show-less btn and give it a onClick handler called handleShowLess.  */}
+                                        {next === movies.length && (
+                                            <div
+                                                style={{
+                                                    display: 'flex',
+                                                    justifyContent: 'center',
+                                                }}
+                                            >
+                                                <Button
+                                                    onClick={handleShowLess}
+                                                    style={{
+                                                        width: '150px',
+                                                        color: '#635f5f',
+                                                        border: 'solid 1px #635f5f',
+                                                        background:
+                                                            'rgba(0, 0, 0, 0.6)',
+                                                        fontWeight: 'bolder',
+                                                        textTransform:
+                                                            'uppercase',
+                                                        margin: '10px 0 30px 0',
+                                                    }}
+                                                >
+                                                    Show less
+                                                </Button>
+                                            </div>
+                                        )}
                                         {/* Use the map() method to iterate through movies array items*/}
-                                        {movies.map((movie) => (
+                                        {movies.slice(0, next).map((movie) => (
                                             //return the MovieCard child component
                                             <Col
                                                 key={movie._id}
@@ -189,6 +273,71 @@ export const MainView = () => {
                                                 />
                                             </Col>
                                         ))}
+                                        {/* Create a load more button and give it a onClick handler called handleMoreImage . */}
+                                        {next < movies.length && (
+                                            <div
+                                                style={{
+                                                    display: 'flex',
+                                                    justifyContent: 'center',
+                                                }}
+                                            >
+                                                <Button
+                                                    onClick={handleMoreImage}
+                                                    style={{
+                                                        width: '150px',
+                                                        color: '#635f5f',
+                                                        border: 'solid 1px #635f5f',
+                                                        background:
+                                                            'rgba(0, 0, 0, 0.6)',
+                                                        fontWeight: 'bolder',
+                                                        textTransform:
+                                                            'uppercase',
+                                                        margin: '10px 0 20px 0',
+                                                    }}
+                                                    className="main-btn--load"
+                                                >
+                                                    Load more
+                                                </Button>
+                                            </div>
+                                        )}
+                                        {/* Create go-to-top btn by using href of <a>. Use id of <NavigationBar> at href. */}
+                                        {next === movies.length && (
+                                            <div
+                                                style={{
+                                                    display: 'flex',
+                                                    justifyContent: 'center',
+                                                }}
+                                            >
+                                                <Button
+                                                    style={{
+                                                        width: '150px',
+                                                        color: '#635f5f',
+                                                        border: 'solid 1px #635f5f',
+                                                        background:
+                                                            'rgba(0, 0, 0, 0.6)',
+                                                        fontWeight: 'bolder',
+                                                        textTransform:
+                                                            'uppercase',
+                                                        margin: '10px 0 20px 0',
+                                                    }}
+                                                >
+                                                    <a
+                                                        href="#top"
+                                                        style={{
+                                                            color: '#635f5f',
+                                                            fontWeight:
+                                                                'bolder',
+                                                            textTransform:
+                                                                'uppercase',
+                                                            textDecoration:
+                                                                'none',
+                                                        }}
+                                                    >
+                                                        Go to the Top
+                                                    </a>
+                                                </Button>
+                                            </div>
+                                        )}
                                     </>
                                 )}
                             </>
@@ -272,6 +421,360 @@ export const MainView = () => {
                                             token={token}
                                             setUser={setUser}
                                         />
+                                    </Col>
+                                )}
+                            </>
+                        }
+                    />
+                    {/* Create route for filtered movies by genre */}
+                    <Route
+                        path="movies/moviesbygenres/period-drama"
+                        element={
+                            <>
+                                {/* Use ternary operator: if user is "falsy" then navigate to "/login". */}
+                                {!user ? (
+                                    //Use replace options property, to redirect to "/login".
+                                    <Navigate to="/login" replace />
+                                ) : (
+                                    //return period drama movies
+
+                                    <>
+                                        {dramaGenreSearch.map((movie) => (
+                                            <div
+                                                key={movie._id}
+                                                style={{
+                                                    textAlign: 'center',
+                                                    display: 'flex',
+                                                    justifyContent: 'center',
+                                                }}
+                                            >
+                                                <Card
+                                                    style={{
+                                                        marginBottom: '20px ',
+                                                    }}
+                                                >
+                                                    <ListGroup variant="flush">
+                                                        <ListGroup.Item>
+                                                            <h2>
+                                                                {
+                                                                    movie.genre
+                                                                        .genreName
+                                                                }
+                                                            </h2>
+                                                        </ListGroup.Item>
+                                                        <ListGroup.Item>
+                                                            <div>
+                                                                {
+                                                                    movie.genre
+                                                                        .genreDescription
+                                                                }
+                                                            </div>
+                                                        </ListGroup.Item>
+                                                    </ListGroup>
+                                                </Card>
+                                            </div>
+                                        ))}
+
+                                        {dramaSearch.map((movie) => (
+                                            //return the MovieCard child component
+                                            <Col
+                                                key={movie._id}
+                                                className="mb-4"
+                                                lg={3}
+                                                md={4}
+                                                sm={6}
+                                                xs={12}
+                                            >
+                                                <MovieCard
+                                                    user={user}
+                                                    movie={movie}
+                                                    token={token}
+                                                    setUser={setUser}
+                                                />
+                                            </Col>
+                                        ))}
+                                    </>
+                                )}
+                            </>
+                        }
+                    />
+                    <Route
+                        path="movies/moviesbygenres/sci-fi"
+                        element={
+                            <>
+                                {/* Use ternary operator: if user is "falsy" then navigate to "/login". */}
+                                {!user ? (
+                                    //Use replace options property, to redirect to "/login".
+                                    <Navigate to="/login" replace />
+                                ) : (
+                                    //return period drama movies
+
+                                    <>
+                                        {scifiGenreSearch.map((movie) => (
+                                            <div
+                                                key={movie._id}
+                                                style={{
+                                                    textAlign: 'center',
+                                                    display: 'flex',
+                                                    justifyContent: 'center',
+                                                }}
+                                            >
+                                                <Card
+                                                    style={{
+                                                        marginBottom: '20px ',
+                                                    }}
+                                                >
+                                                    <ListGroup variant="flush">
+                                                        <ListGroup.Item>
+                                                            <h2>
+                                                                {
+                                                                    movie.genre
+                                                                        .genreName
+                                                                }
+                                                            </h2>
+                                                        </ListGroup.Item>
+                                                        <ListGroup.Item>
+                                                            <div>
+                                                                {
+                                                                    movie.genre
+                                                                        .genreDescription
+                                                                }
+                                                            </div>
+                                                        </ListGroup.Item>
+                                                    </ListGroup>
+                                                </Card>
+                                            </div>
+                                        ))}
+
+                                        {scifiSearch.map((movie) => (
+                                            //return the MovieCard child component
+                                            <Col
+                                                key={movie._id}
+                                                className="mb-4"
+                                                lg={3}
+                                                md={4}
+                                                sm={6}
+                                                xs={12}
+                                            >
+                                                <MovieCard
+                                                    user={user}
+                                                    movie={movie}
+                                                    token={token}
+                                                    setUser={setUser}
+                                                />
+                                            </Col>
+                                        ))}
+                                    </>
+                                )}
+                            </>
+                        }
+                    />
+                    <Route
+                        path="movies/moviesbygenres/hero"
+                        element={
+                            <>
+                                {/* Use ternary operator: if user is "falsy" then navigate to "/login". */}
+                                {!user ? (
+                                    //Use replace options property, to redirect to "/login".
+                                    <Navigate to="/login" replace />
+                                ) : (
+                                    //return period drama movies
+
+                                    <>
+                                        {heroGenreSearch.map((movie) => (
+                                            <div
+                                                key={movie._id}
+                                                style={{
+                                                    textAlign: 'center',
+                                                    display: 'flex',
+                                                    justifyContent: 'center',
+                                                }}
+                                            >
+                                                <Card
+                                                    style={{
+                                                        marginBottom: '20px ',
+                                                    }}
+                                                >
+                                                    <ListGroup variant="flush">
+                                                        <ListGroup.Item>
+                                                            <h2>
+                                                                {
+                                                                    movie.genre
+                                                                        .genreName
+                                                                }
+                                                            </h2>
+                                                        </ListGroup.Item>
+                                                        <ListGroup.Item>
+                                                            <div>
+                                                                {
+                                                                    movie.genre
+                                                                        .genreDescription
+                                                                }
+                                                            </div>
+                                                        </ListGroup.Item>
+                                                    </ListGroup>
+                                                </Card>
+                                            </div>
+                                        ))}
+
+                                        {heroSearch.map((movie) => (
+                                            //return the MovieCard child component
+                                            <Col
+                                                key={movie._id}
+                                                className="mb-4"
+                                                lg={3}
+                                                md={4}
+                                                sm={6}
+                                                xs={12}
+                                            >
+                                                <MovieCard
+                                                    user={user}
+                                                    movie={movie}
+                                                    token={token}
+                                                    setUser={setUser}
+                                                />
+                                            </Col>
+                                        ))}
+                                    </>
+                                )}
+                            </>
+                        }
+                    />
+                    {/* Create route for filtered movies by fantasy genre */}
+                    <Route
+                        path="movies/moviesbygenres/fantasy"
+                        element={
+                            <>
+                                {/* Use ternary operator: if user is "falsy" then navigate to "/login". */}
+                                {!user ? (
+                                    //Use replace options property, to redirect to "/login".
+                                    <Navigate to="/login" replace />
+                                ) : (
+                                    //return fantasy movies
+
+                                    <>
+                                        {fantasyGenreSearch.map((movie) => (
+                                            <div
+                                                key={movie._id}
+                                                style={{
+                                                    textAlign: 'center',
+                                                    display: 'flex',
+                                                    justifyContent: 'center',
+                                                }}
+                                            >
+                                                <Card
+                                                    style={{
+                                                        marginBottom: '20px ',
+                                                    }}
+                                                >
+                                                    <ListGroup variant="flush">
+                                                        <ListGroup.Item>
+                                                            <h2>
+                                                                {
+                                                                    movie.genre
+                                                                        .genreName
+                                                                }
+                                                            </h2>
+                                                        </ListGroup.Item>
+                                                        <ListGroup.Item>
+                                                            <div>
+                                                                {
+                                                                    movie.genre
+                                                                        .genreDescription
+                                                                }
+                                                            </div>
+                                                        </ListGroup.Item>
+                                                    </ListGroup>
+                                                </Card>
+                                            </div>
+                                        ))}
+
+                                        {fantasySearch.map((movie) => (
+                                            //return the MovieCard child component
+                                            <Col
+                                                key={movie._id}
+                                                className="mb-4"
+                                                lg={3}
+                                                md={4}
+                                                sm={6}
+                                                xs={12}
+                                            >
+                                                <MovieCard
+                                                    user={user}
+                                                    movie={movie}
+                                                    token={token}
+                                                    setUser={setUser}
+                                                />
+                                            </Col>
+                                        ))}
+                                    </>
+                                )}
+                            </>
+                        }
+                    />
+                    {/* Create route to trailer */}
+                    <Route
+                        path="/trailer"
+                        element={
+                            <>
+                                {/* Use ternary operator: if user is "falsy" then navigate to "/login". */}
+                                {!user ? (
+                                    //Use replace options property, to redirect to "/login".
+                                    <Navigate to="/login" replace />
+                                ) : (
+                                    //return video as <iframe>
+                                    <Col>
+                                        <div
+                                            style={{
+                                                display: 'flex',
+                                                justifyContent: 'center',
+                                                margin: '20px 0 30px 0',
+                                            }}
+                                        >
+                                            <h1> 📽️ Upcoming releases 🎬</h1>
+                                        </div>
+
+                                        <div
+                                            style={{
+                                                display: 'flex',
+                                                justifyContent: 'center',
+                                            }}
+                                        >
+                                            <iframe
+                                                width="560"
+                                                height="315"
+                                                src="https://www.youtube.com/embed/ewc7TV4Ucbg?si=nGuWk7fjbgigQfa6"
+                                                title="YouTube video player"
+                                                frameBorder="0"
+                                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                                allowFullScreen
+                                            ></iframe>
+                                        </div>
+                                        <div
+                                            style={{
+                                                display: 'flex',
+                                                justifyContent: 'center',
+                                                margin: '20px 0 30px 0',
+                                            }}
+                                        >
+                                            <div>
+                                                <span
+                                                    style={{
+                                                        fontSize: '50px',
+                                                    }}
+                                                >
+                                                    🍿
+                                                </span>
+                                                Don't miss out on the best!{' '}
+                                                <span
+                                                    style={{
+                                                        fontSize: '50px',
+                                                    }}
+                                                >
+                                                    🥤
+                                                </span>
+                                            </div>
+                                        </div>
                                     </Col>
                                 )}
                             </>

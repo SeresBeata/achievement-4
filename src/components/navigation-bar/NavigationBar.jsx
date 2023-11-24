@@ -46,6 +46,9 @@ export const NavigationBar = ({ user, onLoggedOut }) => {
                                 <Nav.Link onClick={onLoggedOut}>
                                     Logout
                                 </Nav.Link>
+                                <Nav.Link as={Link} to="/trailer">
+                                    Trailer
+                                </Nav.Link>
                                 <NavDropdown
                                     title="Profile"
                                     id="basic-nav-dropdown"
@@ -82,6 +85,36 @@ export const NavigationBar = ({ user, onLoggedOut }) => {
                                         )}`}
                                     >
                                         Delete Account
+                                    </NavDropdown.Item>
+                                </NavDropdown>
+
+                                <NavDropdown
+                                    title="Genres"
+                                    id="basic-nav-dropdown"
+                                >
+                                    <NavDropdown.Item
+                                        as={Link}
+                                        to={`movies/moviesbygenres/period-drama`}
+                                    >
+                                        Period Drama
+                                    </NavDropdown.Item>
+                                    <NavDropdown.Item
+                                        as={Link}
+                                        to={`movies/moviesbygenres/sci-fi`}
+                                    >
+                                        Science Fiction
+                                    </NavDropdown.Item>
+                                    <NavDropdown.Item
+                                        as={Link}
+                                        to={`movies/moviesbygenres/hero`}
+                                    >
+                                        Superhero Film
+                                    </NavDropdown.Item>
+                                    <NavDropdown.Item
+                                        as={Link}
+                                        to={`movies/moviesbygenres/fantasy`}
+                                    >
+                                        Fantasy
                                     </NavDropdown.Item>
                                 </NavDropdown>
                             </>

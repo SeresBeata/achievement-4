@@ -18,7 +18,7 @@ export const UpdateProfileView = ({ user, token }) => {
         event.preventDefault();
 
         const data = {
-            name: username,
+            username: username,
             password: password,
             email: email,
             birthday: birthday,
@@ -47,7 +47,7 @@ export const UpdateProfileView = ({ user, token }) => {
                     const errorText = await response.text();
                     // Read the response body as text
                     console.log('Error response body:', errorText);
-                    alert('Update failed!');
+                    alert('Update failed! \n\n' + errorText);
                 }
             })
             .catch((err) => console.log('error', err));

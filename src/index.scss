@@ -67,3 +67,28 @@ img {
     border-radius: 5px;
 }
 /*End: Class selectors*/
+
+/* Custom Scrollbar Start */
+::-webkit-scrollbar {
+    width: 20px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: $base-color-secondary;
+}
+
+::-webkit-scrollbar-thumb {
+    background: $brand-color-secondary;
+    border: 3px solid $brand-color-secondary;
+    border-radius: 10px;
+}
+
+/* Custom Scrollbar for Mozilla Firefox Webbrowser Start */
+@supports (scrollbar-color: $brand-color-secondary $base-color-secondary) {
+    * {
+        scrollbar-color: $brand-color-secondary $base-color-secondary;
+        scrollbar-width: thin;
+    }
+}
+/* End: Custom Scrollbar for Mozilla Firefox Webbrowser */
+/* End: Custom Scrollbar */

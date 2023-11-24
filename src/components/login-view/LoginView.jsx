@@ -1,6 +1,8 @@
 import { useState } from 'react';
 //Import components from React Bootstrap
 import { Form, Button } from 'react-bootstrap';
+//Import from react-router-dom
+import { Link } from 'react-router-dom';
 //import scss
 import './login-view.scss';
 
@@ -19,6 +21,46 @@ export const LoginView = ({ onLoggedIn }) => {
         const data = {
             username: username,
             password: password,
+        };
+
+        //Use fetch() method for "/login" endpoint of myFlix API
+        fetch('https://movie-myflix-c346f5fde8cf.herokuapp.com/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        })
+            .then((response) => response.json()) //transforms the response content into a JSON object that can be used to extract the JWT sent by API.
+            .then((data) => {
+                console.log('Login response: ', data);
+                if (data.user) {
+                    localStorage.setItem('user', JSON.stringify(data.user)); //use localStorage to store the user object
+                    localStorage.setItem('token', data.token); //use the localStorage to store the token
+                    onLoggedIn(data.user, data.token); //pass the user and token back to MainView so they can be used in all the subsequent API requests.
+                } else {
+                    alert(
+                        'Username or password is incorrect. Try again, please!'
+                    );
+                }
+            })
+            .catch((e) => {
+                alert('Oh, sorry! Something went wrong. Please, try again!');
+            });
+    };
+
+    //Login as guest
+    //Guest sign in info
+    const userName = 'Guest';
+    const passWord = 'guest123';
+
+    const guestHandleSubmit = (event) => {
+        // Use preventDefault() to prevent default behavior of the form (reloading the entire page)
+        event.preventDefault();
+
+        const data = {
+            username: userName,
+            password: passWord,
         };
 
         //Use fetch() method for "/login" endpoint of myFlix API
@@ -96,6 +138,33 @@ export const LoginView = ({ onLoggedIn }) => {
                 >
                     Submit
                 </Button>
+            </div>
+            <div
+                className="div-button"
+                style={{ marginTop: '25px', color: '#635f5f' }}
+            >
+                Or continue as a guest:
+            </div>
+            <div className="div-button">
+                <Button
+                    type="submit"
+                    onClick={guestHandleSubmit}
+                    className="continue-btn"
+                >
+                    Continue as Guest
+                </Button>
+            </div>
+            <div
+                className="div-button"
+                style={{ marginTop: '25px', color: '#635f5f' }}
+            >
+                Not a member? &nbsp;
+                <Link
+                    to={'/signup'}
+                    style={{ textDecoration: 'none', color: '#b30000' }}
+                >
+                    Signup!
+                </Link>
             </div>
         </Form>
     );

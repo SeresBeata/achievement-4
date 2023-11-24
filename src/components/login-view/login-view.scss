@@ -38,3 +38,19 @@
     justify-content: center;
 }
 /*End: style the div of btn of form*/
+
+/*Style the continue-btn: Start*/
+.continue-btn {
+    font-weight: bolder;
+    margin-top: 10px;
+    color: #635f5f;
+    border: solid 1px #635f5f;
+    background: rgba(0, 0, 0, 0.6);
+}
+
+.continue-btn:hover {
+    color: #b30000;
+    border-color: #b30000;
+    background: rgba(0, 0, 0, 0.6);
+}
+/*End: Style the continue-btn*/

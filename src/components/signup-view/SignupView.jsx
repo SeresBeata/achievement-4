@@ -30,13 +30,15 @@ export const SignupView = () => {
             headers: {
                 'Content-Type': 'application/json',
             },
-        }).then((response) => {
+        }).then(async (response) => {
             if (response.ok) {
                 alert('Signup successful!');
                 //window.location.reload();
                 window.location.assign('http://localhost:1234/login');
             } else {
-                alert('Signup failed!');
+                const errorText = await response.text();
+                console.log('Error response body:', errorText);
+                alert('Signup failed! \n\n' + errorText + '.');
             }
         });
     };

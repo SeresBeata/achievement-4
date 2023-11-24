@@ -119,6 +119,11 @@ export const MainView = () => {
         setNext(next + imagePerRow);
     };
 
+    //Create show-less function that reloads the page
+    const handleShowLess = () => {
+        window.location.reload();
+    };
+
     //Use state-based router & ternary operator depending on what to return:
     return (
         <BrowserRouter>
@@ -223,6 +228,32 @@ export const MainView = () => {
                                     </Col>
                                 ) : (
                                     <>
+                                        {/* Create show-less btn and give it a onClick handler called handleShowLess.  */}
+                                        {next === movies.length && (
+                                            <div
+                                                style={{
+                                                    display: 'flex',
+                                                    justifyContent: 'center',
+                                                }}
+                                            >
+                                                <Button
+                                                    onClick={handleShowLess}
+                                                    style={{
+                                                        width: '150px',
+                                                        color: '#635f5f',
+                                                        border: 'solid 1px #635f5f',
+                                                        background:
+                                                            'rgba(0, 0, 0, 0.6)',
+                                                        fontWeight: 'bolder',
+                                                        textTransform:
+                                                            'uppercase',
+                                                        margin: '10px 0 30px 0',
+                                                    }}
+                                                >
+                                                    Show less
+                                                </Button>
+                                            </div>
+                                        )}
                                         {/* Use the map() method to iterate through movies array items*/}
                                         {movies.slice(0, next).map((movie) => (
                                             //return the MovieCard child component

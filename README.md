@@ -120,3 +120,9 @@ To see the rendered result, open browser and navigate to **“http://localhost:1
     Product: MongoDB Atlas  
     Date: 23/10/2023  
     [https://www.mongodb.com/cloud/atlas/register](https://www.mongodb.com/cloud/atlas/register)
+
+3.  Reference  
+    Description: Netlify is a remote-first cloud computing company that offers a development platform that includes build, deploy, and serverless backend services for web applications and dynamic websites.  
+    Product: Netlify  
+    Date: 24/11/2023  
+    [https://www.netlify.com/](https://www.netlify.com/)

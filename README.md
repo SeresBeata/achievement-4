@@ -103,7 +103,7 @@ To build the project using Parcel, use the following terminal command:
 
 or
 
-`npm run devStart`
+`npm run start`
 
 To see the rendered result, open browser and navigate to **“http://localhost:1234”**.
 

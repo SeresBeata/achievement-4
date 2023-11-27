@@ -149,7 +149,14 @@ export const LoginView = ({ onLoggedIn }) => {
                 <Button
                     type="submit"
                     onClick={guestHandleSubmit}
-                    className="continue-btn"
+                    //className="continue-btn"
+                    style={{
+                        fontWeight: 'bolder',
+                        marginTop: '10px',
+                        color: '#635f5f',
+                        border: 'solid 1px #635f5f',
+                        background: 'rgba(0, 0, 0, 0.6)',
+                    }}
                 >
                     Continue as Guest
                 </Button>

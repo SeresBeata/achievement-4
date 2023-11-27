@@ -61,3 +61,44 @@
 //     text-transform: uppercase;
 // }
 // /*End: style the btn of card*/
+
+/*Style the border of the form: Start*/
+.form-border {
+    margin-top: 30px;
+    border: 3px solid #ff1a1a;
+    animation: mymove 5s infinite;
+}
+
+//animation of border:
+@keyframes mymove {
+    50% {
+        border-color: #4d4b4b;
+    }
+}
+/*End: style the border of the form*/
+
+/*Style the h3 of form: Start*/
+.form-heading {
+    color: #ff1a1a;
+    animation: Color 5s infinite;
+}
+
+//animation of h3:
+@keyframes Color {
+    50% {
+        color: #4d4b4b;
+    }
+}
+
+// .div-heading {
+//     display: flex;
+//     justify-content: center;
+// }
+/*End: style the h3 of form*/
+
+/*Style the div of btn of form: Start*/
+.div-button {
+    display: flex;
+    justify-content: center;
+}
+/*End: style the div of btn of form*/

@@ -308,34 +308,33 @@ export const MainView = () => {
                                                     justifyContent: 'center',
                                                 }}
                                             >
-                                                <Button
+                                                <a
+                                                    href="#top"
                                                     style={{
-                                                        width: '150px',
                                                         color: '#635f5f',
-                                                        border: 'solid 1px #635f5f',
-                                                        background:
-                                                            'rgba(0, 0, 0, 0.6)',
                                                         fontWeight: 'bolder',
                                                         textTransform:
                                                             'uppercase',
-                                                        margin: '10px 0 20px 0',
+                                                        textDecoration: 'none',
                                                     }}
                                                 >
-                                                    <a
-                                                        href="#top"
+                                                    <Button
                                                         style={{
+                                                            width: '150px',
                                                             color: '#635f5f',
+                                                            border: 'solid 1px #635f5f',
+                                                            background:
+                                                                'rgba(0, 0, 0, 0.6)',
                                                             fontWeight:
                                                                 'bolder',
                                                             textTransform:
                                                                 'uppercase',
-                                                            textDecoration:
-                                                                'none',
+                                                            margin: '10px 0 20px 0',
                                                         }}
                                                     >
                                                         Go to the Top
-                                                    </a>
-                                                </Button>
+                                                    </Button>
+                                                </a>
                                             </div>
                                         )}
                                     </>

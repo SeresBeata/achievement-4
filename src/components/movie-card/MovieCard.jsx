@@ -130,11 +130,19 @@ export const MovieCard = ({ user, movie, token, setUser }) => {
                     </div>
                 </div>
                 {/* Redirect the user to the selected movie with <Link>. */}
-                <Link to={`/movies/${encodeURIComponent(movie._id)}`}>
-                    <Button variant="link" className="moviecard--open-btn ">
-                        Open
-                    </Button>
-                </Link>
+                <Button
+                    as={Link}
+                    to={`/movies/${encodeURIComponent(movie._id)}`}
+                    //variant="link"
+                    //className="moviecard--open-btn "
+                    style={{
+                        textTransform: 'uppercase',
+                        color: 'black',
+                        fontWeight: 'bolder',
+                    }}
+                >
+                    Open
+                </Button>
             </Card.Body>
         </Card>
     );

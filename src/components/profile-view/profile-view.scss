@@ -1,14 +1,70 @@
-/*Style the card component: Start*/
-.card-profile {
-    text-align: center;
-    margin: 30px 20px 0 20px;
-    background: rgba(0, 0, 0, 0.6);
-    padding: 10px 0 20px 0;
-}
-/*End: Style the card component*/
+// /*Style the card component: Start*/
+// .card-profile {
+//     text-align: center;
+//     margin: 30px 20px 0 20px;
+//     background: rgba(0, 0, 0, 0.6);
+//     padding: 10px 0 20px 0;
+// }
+// /*End: Style the card component*/
 
-/*Style the border of the card: Start*/
-.card-border {
+// /*Style the border of the card: Start*/
+// .card-border {
+//     border: 3px solid #ff1a1a;
+//     animation: mymove 5s infinite;
+// }
+
+// //animation of border:
+// @keyframes mymove {
+//     50% {
+//         border-color: #4d4b4b;
+//     }
+// }
+// /*End: style the border of the card/
+
+// /*Style the h3 of form: Start*/
+// .card-heading {
+//     //margin-top: 10px;
+//     color: #ff1a1a;
+//     animation: Color 5s infinite;
+// }
+
+// //animation of h3:
+// @keyframes Color {
+//     50% {
+//         color: #4d4b4b;
+//     }
+// }
+
+// .listgroup-heading {
+//     font-weight: bolder;
+//     background: rgba(0, 0, 0, 0.6);
+//     border: none;
+// }
+// /*End: style the h3 of form*/
+
+// .listgroup-item {
+//     background: rgba(0, 0, 0, 0.6);
+//     border: none;
+//     padding-bottom: 15px;
+// }
+
+// .listgroup-item--info {
+//     color: #959090;
+//     font-weight: bolder;
+//     padding-right: 10px;
+// }
+
+// /*Style the btn of card: Start*/
+// .card-button {
+//     font-weight: bolder;
+//     margin-top: 20px;
+//     text-transform: uppercase;
+// }
+// /*End: style the btn of card*/
+
+/*Style the border of the form: Start*/
+.form-border {
+    margin-top: 30px;
     border: 3px solid #ff1a1a;
     animation: mymove 5s infinite;
 }
@@ -19,11 +75,10 @@
         border-color: #4d4b4b;
     }
 }
-/*End: style the border of the card/
+/*End: style the border of the form*/
 
 /*Style the h3 of form: Start*/
-.card-heading {
-    //margin-top: 10px;
+.form-heading {
     color: #ff1a1a;
     animation: Color 5s infinite;
 }
@@ -35,29 +90,15 @@
     }
 }
 
-.listgroup-heading {
-    font-weight: bolder;
-    background: rgba(0, 0, 0, 0.6);
-    border: none;
-}
+// .div-heading {
+//     display: flex;
+//     justify-content: center;
+// }
 /*End: style the h3 of form*/
 
-.listgroup-item {
-    background: rgba(0, 0, 0, 0.6);
-    border: none;
-    padding-bottom: 15px;
+/*Style the div of btn of form: Start*/
+.div-button {
+    display: flex;
+    justify-content: center;
 }
-
-.listgroup-item--info {
-    color: #959090;
-    font-weight: bolder;
-    padding-right: 10px;
-}
-
-/*Style the btn of card: Start*/
-.card-button {
-    font-weight: bolder;
-    margin-top: 20px;
-    text-transform: uppercase;
-}
-/*End: style the btn of card*/
+/*End: style the div of btn of form*/

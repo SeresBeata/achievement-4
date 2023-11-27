@@ -29,7 +29,7 @@ The aim of this project was to build the client-side component of a “myFlix”
 
 ### Link to the App
 
-A link to the live, hosted version of the app: [https://movie-myflix-c346f5fde8cf.herokuapp.com/](https://movie-myflix-c346f5fde8cf.herokuapp.com/)
+A link to the live, hosted version of the app: [https://mymovie-myflix.netlify.app/](https://mymovie-myflix.netlify.app/)
 
 ### Essential Views and Features
 

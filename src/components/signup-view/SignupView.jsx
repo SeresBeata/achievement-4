@@ -34,7 +34,9 @@ export const SignupView = () => {
             if (response.ok) {
                 alert('Signup successful!');
                 //window.location.reload();
-                window.location.assign('http://localhost:1234/login');
+                window.location.assign(
+                    'https://mymovie-myflix.netlify.app/login'
+                );
             } else {
                 const errorText = await response.text();
                 console.log('Error response body:', errorText);
